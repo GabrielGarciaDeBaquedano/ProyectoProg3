@@ -40,6 +40,7 @@ public class MenuArcade extends JFrame {
 		setLocation( 250, 90 );
 		
 		lLogotipoArcade = new JLabel( new ImageIcon( "src/img/arcade.png" ) );
+		lLogotipoFlappyCar = new JLabel( new ImageIcon( "src/img/lamborghini_inicio.jpg" ) );
 		lLogotipoAsteroids = new JLabel( new ImageIcon( "src/img/asteroids-deluxe-logo.png" ) );
 		lMensaje = new JLabel();
 		bAsteroids = new JButton( "Asteroids" );
@@ -56,6 +57,8 @@ public class MenuArcade extends JFrame {
 		getContentPane().add( lMensaje, BorderLayout.NORTH );
 		getContentPane().add( lLogotipoAsteroids, BorderLayout.CENTER );
 		lLogotipoAsteroids.setVisible(false);
+		getContentPane().add( lLogotipoFlappyCar, BorderLayout.CENTER );
+		lLogotipoFlappyCar.setVisible(false);
 		getContentPane().add( lLogotipoArcade, BorderLayout.CENTER );
 		pInferior.add( bAsteroids );
 		pInferior.add( bPong );
@@ -107,6 +110,20 @@ public class MenuArcade extends JFrame {
 						dispose();
 					}
 			});
+		
+		bFlappyCar.addMouseListener(new MouseAdapter() {
+			@Override
+            public void mouseEntered(MouseEvent arg0) {
+				lLogotipoArcade.setVisible(false);
+				lLogotipoFlappyCar.setVisible(true);
+				getContentPane().add( lLogotipoFlappyCar, BorderLayout.CENTER );		
+            }
+			@Override
+            public void mouseExited(MouseEvent arg0) {
+				lLogotipoFlappyCar.setVisible(false);
+				lLogotipoArcade.setVisible(true);
+            }
+		});
 		
 		bFlappyCar.addActionListener( 
 				new ActionListener() { 
