@@ -4,6 +4,15 @@ import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.PrintStream;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -14,6 +23,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 public class MenuLogin extends JFrame {
+	
+	static PrintStream usuarios;
 
 		public static void main(String[] args) {
 			MenuLogin ml = new MenuLogin();
@@ -21,7 +32,7 @@ public class MenuLogin extends JFrame {
 		}
 		
 		private JTextField nombreUsuario;
-		private JTextField contrase�a;
+		private JTextField contraseña;
 		private JButton bRegistro;
 		private JButton bIniciosesion;
 		private JLabel lGif;
@@ -42,7 +53,7 @@ public class MenuLogin extends JFrame {
 			
 			lGif = new JLabel( new ImageIcon( "src/img/giphy.gif" ) );
 			nombreUsuario = new JTextField(20);
-			contrase�a = new JTextField(17);
+			contraseña = new JTextField(17);
 			bRegistro = new JButton("Registrarse");
 			bIniciosesion = new JButton("Iniciar sesion");
 			
@@ -56,7 +67,7 @@ public class MenuLogin extends JFrame {
 			getContentPane().add( lGif, BorderLayout.CENTER );
 			
 			pIzq.add(nombreUsuario);
-			pIzq.add(contrase�a);
+			pIzq.add(contraseña);
 			
 			getContentPane().add(pIzq, BorderLayout.WEST);
 			
@@ -68,10 +79,82 @@ public class MenuLogin extends JFrame {
 			panelContenidos.setLayout(new BoxLayout(panelContenidos,BoxLayout.Y_AXIS));
 			pIzq.add(panelContenidos);
 			posicionaLinea( panelContenidos, "Nick:", nombreUsuario );
-			posicionaLinea( panelContenidos, "Password:", contrase�a );
+			posicionaLinea( panelContenidos, "Password:", contraseña );
 			
+			bRegistro.addActionListener( 
+					new ActionListener() {
+						private boolean usuarioValido;
+
+						@Override
+						public void actionPerformed(ActionEvent e) {
+							ArrayList<String> l = new ArrayList<>();
+							ArrayList<String> nomUsuario = new ArrayList<>();
+							cargarFicheroUsuarios(l, "usuarios.txt");
+							
+							for (String linea : l) {
+								nomUsuario.add(linea.split(": ")[1].split(" ")[0]);
+							}
+							
+							for (String string : nomUsuario) {
+								if(string == nombreUsuario.getText()) {
+									usuarioValido = false;
+								}
+							}
+							
+							if(usuarioValido = true) {
+							
+							try {
+								usuarios = new PrintStream(new FileOutputStream("usuarios.txt", true));
+							} catch (Exception e1) {
+							}
+							usuarios.println("Usuario: "+nombreUsuario.getText()+" Contraseña: "+contraseña.getText());
+							
+							Thread t = new Thread () {
+								public void run() {
+										MenuArcade.main(null);
+								}
+							};
+							t.start(); 
+							dispose();
+						}
+							else {
+								System.out.println("El nombre de usuario ya esta en uso");
+							}
+						}
+					});	
 			
-			
+			bIniciosesion.addActionListener( 
+					new ActionListener() {
+						@Override
+						public void actionPerformed(ActionEvent e) {
+							
+							Thread t = new Thread () {
+								public void run() {
+									MenuArcade.main(null);
+								}
+							};
+							t.start(); 
+							dispose();
+						}
+					});	
 		}
+			
+			public static void cargarFicheroUsuarios( ArrayList<String> l, String nombreFic ) {
+				try {
+					Scanner fE = new Scanner( new FileInputStream( nombreFic ) );
+					while (fE.hasNext()) {
+						String linea = fE.nextLine();
+						// Trabajo con cada línea
+						try {
+							l.add( linea );
+						} catch (Exception e) {
+							System.out.println( "Problema en la línea " + linea );
+						}
+					}
+					fE.close();
+				} catch (IOException e) {
+					System.out.println( "No ha sido posible leer el fichero." );
+				}
+			}
 		
 }
