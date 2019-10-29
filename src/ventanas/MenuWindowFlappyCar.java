@@ -127,6 +127,8 @@ public class MenuWindowFlappyCar extends JFrame implements ActionListener {
     			
     		}
     		System.exit(0);
+    		MenuArcade m = new MenuArcade();
+    		m.setVisible( true );
     	}
     }
 
