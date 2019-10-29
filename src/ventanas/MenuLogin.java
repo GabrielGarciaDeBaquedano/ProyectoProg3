@@ -13,7 +13,7 @@ public class MenuLogin extends JFrame {
 		}
 		
 		private JTextField nombreUsuario;
-		private JTextField contraseña;
+		private JTextField contraseÃ±a;
 		private JButton bRegistro;
 		private JButton bIniciosesion;
 		
@@ -24,7 +24,7 @@ public class MenuLogin extends JFrame {
 			setLocation( 250, 90 );
 			
 			nombreUsuario = new JTextField();
-			contraseña = new JTextField();
+			contraseÃ±a = new JTextField();
 			bRegistro = new JButton("Registrarse");
 			bIniciosesion = new JButton("Iniciar sesion");
 			

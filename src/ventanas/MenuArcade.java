@@ -3,6 +3,8 @@ package ventanas;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -38,6 +40,7 @@ public class MenuArcade extends JFrame {
 		setLocation( 250, 90 );
 		
 		lLogotipoArcade = new JLabel( new ImageIcon( "src/img/arcade.png" ) );
+		lLogotipoAsteroids = new JLabel( new ImageIcon( "src/img/asteroids-deluxe-logo.png" ) );
 		lMensaje = new JLabel();
 		bAsteroids = new JButton( "Asteroids" );
 		bPong = new JButton( "Pong" );
@@ -51,7 +54,8 @@ public class MenuArcade extends JFrame {
 		pCentral.setLayout( layoutCentral );
 		
 		getContentPane().add( lMensaje, BorderLayout.NORTH );
-		
+		getContentPane().add( lLogotipoAsteroids, BorderLayout.CENTER );
+		lLogotipoAsteroids.setVisible(false);
 		getContentPane().add( lLogotipoArcade, BorderLayout.CENTER );
 		pInferior.add( bAsteroids );
 		pInferior.add( bPong );
@@ -74,6 +78,20 @@ public class MenuArcade extends JFrame {
 						dispose();
 					}
 			});
+		
+		bAsteroids.addMouseListener(new MouseAdapter() {
+			@Override
+            public void mouseEntered(MouseEvent arg0) {
+				lLogotipoArcade.setVisible(false);
+				lLogotipoAsteroids.setVisible(true);
+				getContentPane().add( lLogotipoAsteroids, BorderLayout.CENTER );		
+            }
+			@Override
+            public void mouseExited(MouseEvent arg0) {
+				lLogotipoAsteroids.setVisible(false);
+				lLogotipoArcade.setVisible(true);
+            }
+		});
 		
 		bPong.addActionListener( 
 				new ActionListener() { 
