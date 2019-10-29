@@ -1,9 +1,11 @@
 package ventanas;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileInputStream;
@@ -19,7 +21,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 public class MenuLogin extends JFrame {
@@ -32,7 +36,7 @@ public class MenuLogin extends JFrame {
 		}
 		
 		private JTextField nombreUsuario;
-		private JTextField contraseÃ±a;
+		private JTextField contraseña;
 		private JButton bRegistro;
 		private JButton bIniciosesion;
 		private JLabel lGif;
@@ -53,21 +57,25 @@ public class MenuLogin extends JFrame {
 			
 			lGif = new JLabel( new ImageIcon( "src/img/giphy.gif" ) );
 			nombreUsuario = new JTextField(20);
-			contraseÃ±a = new JTextField(17);
+			contraseña = new JPasswordField(17);
 			bRegistro = new JButton("Registrarse");
 			bIniciosesion = new JButton("Iniciar sesion");
-			
+			Font fontBotones = new Font( "Arial", Font.BOLD, 16 );
+			for (JButton b : new JButton[] { bRegistro, bIniciosesion } )
+				b.setFont( fontBotones );
 			
 			JPanel pIzq = new JPanel();
 			JPanel pInferior = new JPanel();
+			pInferior.setBackground(Color.DARK_GRAY);
 			JPanel pCentral = new JPanel();
 			
 			BoxLayout layoutCentral = new BoxLayout( pCentral, BoxLayout.Y_AXIS );
 			pCentral.setLayout( layoutCentral );
 			getContentPane().add( lGif, BorderLayout.CENTER );
 			
+			
 			pIzq.add(nombreUsuario);
-			pIzq.add(contraseÃ±a);
+			pIzq.add(contraseña);
 			
 			getContentPane().add(pIzq, BorderLayout.WEST);
 			
@@ -79,7 +87,7 @@ public class MenuLogin extends JFrame {
 			panelContenidos.setLayout(new BoxLayout(panelContenidos,BoxLayout.Y_AXIS));
 			pIzq.add(panelContenidos);
 			posicionaLinea( panelContenidos, "Nick:", nombreUsuario );
-			posicionaLinea( panelContenidos, "Password:", contraseÃ±a );
+			posicionaLinea( panelContenidos, "Password:", contraseña );
 			
 			bRegistro.addActionListener( 
 					new ActionListener() {
@@ -87,6 +95,15 @@ public class MenuLogin extends JFrame {
 
 						@Override
 						public void actionPerformed(ActionEvent e) {
+							if(nombreUsuario.getText().isEmpty()) {
+								JOptionPane.showMessageDialog(null, "Introduzca un nombre de usuario");
+							}
+							
+							else if(contraseña.getText().isEmpty()) {
+								JOptionPane.showMessageDialog(null, "Introduzca una contraseña");
+							}
+							
+							else {
 							ArrayList<String> l = new ArrayList<>();
 							ArrayList<String> nomUsuario = new ArrayList<>();
 							cargarFicheroUsuarios(l, "usuarios.txt");
@@ -107,7 +124,7 @@ public class MenuLogin extends JFrame {
 								usuarios = new PrintStream(new FileOutputStream("usuarios.txt", true));
 							} catch (Exception e1) {
 							}
-							usuarios.println("Usuario: "+nombreUsuario.getText()+" ContraseÃ±a: "+contraseÃ±a.getText());
+							usuarios.println("Usuario: "+nombreUsuario.getText()+" Contraseña: "+contraseña.getText());
 							
 							Thread t = new Thread () {
 								public void run() {
@@ -121,13 +138,22 @@ public class MenuLogin extends JFrame {
 								System.out.println("El nombre de usuario ya esta en uso");
 							}
 						}
+						}
 					});	
 			
 			bIniciosesion.addActionListener( 
 					new ActionListener() {
 						@Override
 						public void actionPerformed(ActionEvent e) {
+							if(nombreUsuario.getText().isEmpty()) {
+								JOptionPane.showMessageDialog(null, "Introduzca un nombre de usuario");
+							}
 							
+							else if(contraseña.getText().isEmpty()) {
+								JOptionPane.showMessageDialog(null, "Introduzca una contraseña");
+							}
+							
+							else {
 							Thread t = new Thread () {
 								public void run() {
 									MenuArcade.main(null);
@@ -135,6 +161,7 @@ public class MenuLogin extends JFrame {
 							};
 							t.start(); 
 							dispose();
+						}
 						}
 					});	
 		}
