@@ -75,7 +75,7 @@ public class VentanaGraficaFlappyCar extends JFrame implements WindowListener {
 		setTitle( titulo );
 		setResizable( !tamFijo );
 		this.addWindowListener(this);
-		this.setIconImage(Toolkit.getDefaultToolkit().getImage(VentanaGraficaFlappyCar.class.getResource("src/img/logo.png")));
+		this.setIconImage(Toolkit.getDefaultToolkit().getImage(VentanaGraficaFlappyCar.class.getResource("logo.png")));
 		pAreaControl.setMaximumSize( new Dimension(anchuraPanelControl, 5000));
 		pAreaControl.setMinimumSize( new Dimension(anchuraPanelControl, 0));
 	// amarillo 
@@ -643,14 +643,14 @@ public class VentanaGraficaFlappyCar extends JFrame implements WindowListener {
 	 
 	public static void sonidos() throws LineUnavailableException, IOException, UnsupportedAudioFileException{
 		Clip musica = AudioSystem.getClip();
-		musica.open(AudioSystem.getAudioInputStream(new File("src/Sonido/Sonido.wav")));
+		musica.open(AudioSystem.getAudioInputStream(new File("Sonido.wav")));
 		musica.start();
 	}
 	// Metodo para apagar la musica
 	 
 	public static void apagarSonidos() throws LineUnavailableException, IOException, UnsupportedAudioFileException{
 		Clip musica = AudioSystem.getClip();
-		musica.open(AudioSystem.getAudioInputStream(new File("src/Sonido/Sonido.wav")));
+		musica.open(AudioSystem.getAudioInputStream(new File("Sonido.wav")));
 		musica.start();
 		musica.stop();
 		

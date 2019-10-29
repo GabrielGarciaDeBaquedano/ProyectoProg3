@@ -21,7 +21,7 @@ public class VentanaInicioFlappyCar extends JFrame{
 		imagen = new JPanel();
 		imagen.add(fondo);
 		this.add(imagen);
-		this.setIconImage(Toolkit.getDefaultToolkit().getImage(VentanaGraficaFlappyCar.class.getResource("src/img/logo.png")));
+		this.setIconImage(Toolkit.getDefaultToolkit().getImage(VentanaGraficaFlappyCar.class.getResource("logo.png")));
 	}
 	public static void main(String [] s){
 		VentanaInicioFlappyCar v=new VentanaInicioFlappyCar();
