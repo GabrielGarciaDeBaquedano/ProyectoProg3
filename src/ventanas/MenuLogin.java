@@ -36,7 +36,10 @@ public class MenuLogin extends JFrame {
 		}
 		
 		private JTextField nombreUsuario;
+
 		private JTextField contraseña;
+
+
 		private JLabel titulo;
 		private JButton bRegistro;
 		private JButton bIniciosesion;
@@ -58,7 +61,11 @@ public class MenuLogin extends JFrame {
 			
 			lGif = new JLabel( new ImageIcon( "src/img/giphy.gif" ) );
 			nombreUsuario = new JTextField(20);
+
 			contraseña = new JPasswordField(17);
+
+			contraseña = new JPasswordField(17);
+
 			titulo = new JLabel("ARCADE MACHINE");
 			
 			bRegistro = new JButton("Registrarse");
@@ -81,7 +88,11 @@ public class MenuLogin extends JFrame {
 			
 			
 			pIzq.add(nombreUsuario);
+
 			pIzq.add(contraseña);
+
+			pIzq.add(contraseña);
+
 			pIzq.add(titulo);
 			
 			getContentPane().add(pIzq, BorderLayout.WEST);
