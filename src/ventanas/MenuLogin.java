@@ -37,13 +37,14 @@ public class MenuLogin extends JFrame {
 		
 		private JTextField nombreUsuario;
 		private JTextField contraseña;
+		private JLabel titulo;
 		private JButton bRegistro;
 		private JButton bIniciosesion;
 		private JLabel lGif;
 		
 		private void posicionaLinea( Container p, String etiqueta, Component campo ) {
 			JPanel tempPanel = new JPanel();
-			tempPanel.setLayout( new FlowLayout(FlowLayout.LEFT) );
+			tempPanel.setLayout( new FlowLayout(FlowLayout.CENTER) );
 			tempPanel.add( new JLabel( etiqueta ) );
 			tempPanel.add( campo );
 			p.add( tempPanel );
@@ -58,13 +59,18 @@ public class MenuLogin extends JFrame {
 			lGif = new JLabel( new ImageIcon( "src/img/giphy.gif" ) );
 			nombreUsuario = new JTextField(20);
 			contraseña = new JPasswordField(17);
+			titulo = new JLabel("ARCADE MACHINE");
+			
 			bRegistro = new JButton("Registrarse");
 			bIniciosesion = new JButton("Iniciar sesion");
+			Font font1 = new Font("Tahoma", Font.BOLD, 24);
+			titulo.setFont(font1);
 			Font fontBotones = new Font( "Arial", Font.BOLD, 16 );
 			for (JButton b : new JButton[] { bRegistro, bIniciosesion } )
 				b.setFont( fontBotones );
 			
 			JPanel pIzq = new JPanel();
+			pIzq.setBackground(Color.lightGray);
 			JPanel pInferior = new JPanel();
 			pInferior.setBackground(Color.DARK_GRAY);
 			JPanel pCentral = new JPanel();
@@ -76,6 +82,7 @@ public class MenuLogin extends JFrame {
 			
 			pIzq.add(nombreUsuario);
 			pIzq.add(contraseña);
+			pIzq.add(titulo);
 			
 			getContentPane().add(pIzq, BorderLayout.WEST);
 			
@@ -86,6 +93,7 @@ public class MenuLogin extends JFrame {
 			Container panelContenidos = new JPanel();
 			panelContenidos.setLayout(new BoxLayout(panelContenidos,BoxLayout.Y_AXIS));
 			pIzq.add(panelContenidos);
+			posicionaLinea( panelContenidos, null, titulo );
 			posicionaLinea( panelContenidos, "Nick:", nombreUsuario );
 			posicionaLinea( panelContenidos, "Password:", contraseña );
 			
