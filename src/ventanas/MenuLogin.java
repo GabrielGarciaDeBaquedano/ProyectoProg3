@@ -36,14 +36,15 @@ public class MenuLogin extends JFrame {
 		}
 		
 		private JTextField nombreUsuario;
-		private JTextField contrase�a;
+		private JTextField contraseña;
+		private JLabel titulo;
 		private JButton bRegistro;
 		private JButton bIniciosesion;
 		private JLabel lGif;
 		
 		private void posicionaLinea( Container p, String etiqueta, Component campo ) {
 			JPanel tempPanel = new JPanel();
-			tempPanel.setLayout( new FlowLayout(FlowLayout.LEFT) );
+			tempPanel.setLayout( new FlowLayout(FlowLayout.CENTER) );
 			tempPanel.add( new JLabel( etiqueta ) );
 			tempPanel.add( campo );
 			p.add( tempPanel );
@@ -57,14 +58,19 @@ public class MenuLogin extends JFrame {
 			
 			lGif = new JLabel( new ImageIcon( "src/img/giphy.gif" ) );
 			nombreUsuario = new JTextField(20);
-			contrase�a = new JPasswordField(17);
+			contraseña = new JPasswordField(17);
+			titulo = new JLabel("ARCADE MACHINE");
+			
 			bRegistro = new JButton("Registrarse");
 			bIniciosesion = new JButton("Iniciar sesion");
+			Font font1 = new Font("Tahoma", Font.BOLD, 24);
+			titulo.setFont(font1);
 			Font fontBotones = new Font( "Arial", Font.BOLD, 16 );
 			for (JButton b : new JButton[] { bRegistro, bIniciosesion } )
 				b.setFont( fontBotones );
 			
 			JPanel pIzq = new JPanel();
+			pIzq.setBackground(Color.lightGray);
 			JPanel pInferior = new JPanel();
 			pInferior.setBackground(Color.DARK_GRAY);
 			JPanel pCentral = new JPanel();
@@ -75,7 +81,8 @@ public class MenuLogin extends JFrame {
 			
 			
 			pIzq.add(nombreUsuario);
-			pIzq.add(contrase�a);
+			pIzq.add(contraseña);
+			pIzq.add(titulo);
 			
 			getContentPane().add(pIzq, BorderLayout.WEST);
 			
@@ -86,8 +93,9 @@ public class MenuLogin extends JFrame {
 			Container panelContenidos = new JPanel();
 			panelContenidos.setLayout(new BoxLayout(panelContenidos,BoxLayout.Y_AXIS));
 			pIzq.add(panelContenidos);
+			posicionaLinea( panelContenidos, null, titulo );
 			posicionaLinea( panelContenidos, "Nick:", nombreUsuario );
-			posicionaLinea( panelContenidos, "Password:", contrase�a );
+			posicionaLinea( panelContenidos, "Password:", contraseña );
 			
 			bRegistro.addActionListener( 
 					new ActionListener() {
@@ -99,8 +107,8 @@ public class MenuLogin extends JFrame {
 								JOptionPane.showMessageDialog(null, "Introduzca un nombre de usuario");
 							}
 							
-							else if(contrase�a.getText().isEmpty()) {
-								JOptionPane.showMessageDialog(null, "Introduzca una contrase�a");
+							else if(contraseña.getText().isEmpty()) {
+								JOptionPane.showMessageDialog(null, "Introduzca una contraseña");
 							}
 							
 							else {
@@ -124,7 +132,7 @@ public class MenuLogin extends JFrame {
 								usuarios = new PrintStream(new FileOutputStream("usuarios.txt", true));
 							} catch (Exception e1) {
 							}
-							usuarios.println("Usuario: "+nombreUsuario.getText()+" Contrase�a: "+contrase�a.getText());
+							usuarios.println("Usuario: "+nombreUsuario.getText()+" Contraseña: "+contraseña.getText());
 							
 							Thread t = new Thread () {
 								public void run() {
@@ -149,8 +157,8 @@ public class MenuLogin extends JFrame {
 								JOptionPane.showMessageDialog(null, "Introduzca un nombre de usuario");
 							}
 							
-							else if(contrase�a.getText().isEmpty()) {
-								JOptionPane.showMessageDialog(null, "Introduzca una contrase�a");
+							else if(contraseña.getText().isEmpty()) {
+								JOptionPane.showMessageDialog(null, "Introduzca una contraseña");
 							}
 							
 							else {
@@ -171,11 +179,11 @@ public class MenuLogin extends JFrame {
 					Scanner fE = new Scanner( new FileInputStream( nombreFic ) );
 					while (fE.hasNext()) {
 						String linea = fE.nextLine();
-						// Trabajo con cada línea
+						// Trabajo con cada lÃ­nea
 						try {
 							l.add( linea );
 						} catch (Exception e) {
-							System.out.println( "Problema en la línea " + linea );
+							System.out.println( "Problema en la lÃ­nea " + linea );
 						}
 					}
 					fE.close();
