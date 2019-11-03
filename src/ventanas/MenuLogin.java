@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -44,6 +45,8 @@ public class MenuLogin extends JFrame {
 		private JButton bRegistro;
 		private JButton bIniciosesion;
 		private JLabel lGif;
+		private String UsuarioValido = "[a-zA-Z_0-9]{1,12}@[a-z]{5,12}.[a-z]{2,4}";
+		private String ContraseñaValida = "[a-zA-Z_0-9]{8,}";
 		
 		private void posicionaLinea( Container p, String etiqueta, Component campo ) {
 			JPanel tempPanel = new JPanel();
@@ -110,54 +113,62 @@ public class MenuLogin extends JFrame {
 			
 			bRegistro.addActionListener( 
 					new ActionListener() {
-						private boolean usuarioValido;
+						//private boolean usuarioValido;
+						Pattern patUsuario = Pattern.compile(UsuarioValido);
+						Pattern patContraseña = Pattern.compile(ContraseñaValida);
 
 						@Override
 						public void actionPerformed(ActionEvent e) {
-							if(nombreUsuario.getText().isEmpty()) {
-								JOptionPane.showMessageDialog(null, "Introduzca un nombre de usuario");
+							if(patUsuario.matcher(nombreUsuario.getText()).matches() && patContraseña.matcher(contraseña.getText()).matches()) {
+								Thread t = new Thread () {
+									public void run() {
+											MenuArcade.main(null);
+									}
+								};
+								t.start(); 
+								dispose();
+							}else if(patUsuario.matcher(nombreUsuario.getText()).matches()!=true){
+								JOptionPane.showMessageDialog(null, "Introduzca un usuario valido");
+							
+							}else if(patUsuario.matcher(contraseña.getText()).matches()!=true){
+								JOptionPane.showMessageDialog(null, "Introduzca una contraseña valida");
+							
 							}
 							
-							else if(contraseña.getText().isEmpty()) {
-								JOptionPane.showMessageDialog(null, "Introduzca una contraseña");
-							}
+//							else if(contraseña.getText().isEmpty()) {
+//								JOptionPane.showMessageDialog(null, "Introduzca una contraseña");
+//							}
+//							
+//							else {
+//							ArrayList<String> l = new ArrayList<>();
+//							ArrayList<String> nomUsuario = new ArrayList<>();
+//							cargarFicheroUsuarios(l, "usuarios.txt");
+//							
+//							for (String linea : l) {
+//								nomUsuario.add(linea.split(": ")[1].split(" ")[0]);
+//							}
+//							
+//							for (String string : nomUsuario) {
+//								if(string == nombreUsuario.getText()) {
+//									usuarioValido = false;
+//								}
+//							}
+//							
+//							if(usuarioValido = true) {
+//							
+//							try {
+//								usuarios = new PrintStream(new FileOutputStream("usuarios.txt", true));
+//							} catch (Exception e1) {
+//							}
+//							usuarios.println("Usuario: "+nombreUsuario.getText()+" Contraseña: "+contraseña.getText());
+//							
 							
-							else {
-							ArrayList<String> l = new ArrayList<>();
-							ArrayList<String> nomUsuario = new ArrayList<>();
-							cargarFicheroUsuarios(l, "usuarios.txt");
-							
-							for (String linea : l) {
-								nomUsuario.add(linea.split(": ")[1].split(" ")[0]);
-							}
-							
-							for (String string : nomUsuario) {
-								if(string == nombreUsuario.getText()) {
-									usuarioValido = false;
-								}
-							}
-							
-							if(usuarioValido = true) {
-							
-							try {
-								usuarios = new PrintStream(new FileOutputStream("usuarios.txt", true));
-							} catch (Exception e1) {
-							}
-							usuarios.println("Usuario: "+nombreUsuario.getText()+" Contraseña: "+contraseña.getText());
-							
-							Thread t = new Thread () {
-								public void run() {
-										MenuArcade.main(null);
-								}
-							};
-							t.start(); 
-							dispose();
 						}
-							else {
-								System.out.println("El nombre de usuario ya esta en uso");
-							}
-						}
-						}
+//							else {
+//								System.out.println("El nombre de usuario ya esta en uso");
+//							}
+//						}
+//						}
 					});	
 			
 			bIniciosesion.addActionListener( 
