@@ -149,62 +149,33 @@ public class MenuLogin extends JFrame {
 							}else if(patUsuario.matcher(contraseña.getText()).matches()!=true){
 								JOptionPane.showMessageDialog(null, "Introduzca una contraseña valida");
 							
-							}
-							
-//							
-//							else {
-//							ArrayList<String> l = new ArrayList<>();
-//							ArrayList<String> nomUsuario = new ArrayList<>();
-//							cargarFicheroUsuarios(l, "usuarios.txt");
-//							
-//							for (String linea : l) {
-//								nomUsuario.add(linea.split(": ")[1].split(" ")[0]);
-//							}
-//							
-//							for (String string : nomUsuario) {
-//								if(string == nombreUsuario.getText()) {
-//									usuarioValido = false;
-//								}
-//							}
-//							
-//							if(usuarioValido = true) {
-//							
-//							try {
-//								usuarios = new PrintStream(new FileOutputStream("usuarios.txt", true));
-//							} catch (Exception e1) {
-//							}
-//							usuarios.println("Usuario: "+nombreUsuario.getText()+" Contraseña: "+contraseña.getText());
-//							
-							
+							}		
 						}
-//							else {
-//								System.out.println("El nombre de usuario ya esta en uso");
-//							}
-//						}
-//						}
 					});	
 			
 			bIniciosesion.addActionListener( 
 					new ActionListener() {
+						private boolean usuarioValido = false;
 						@Override
 						public void actionPerformed(ActionEvent e) {
-							if(nombreUsuario.getText().isEmpty()) {
-								JOptionPane.showMessageDialog(null, "Introduzca un nombre de usuario");
-							}
-							
-							else if(contraseña.getText().isEmpty()) {
-								JOptionPane.showMessageDialog(null, "Introduzca una contraseña");
-							}
-							
-							else {
-							Thread t = new Thread () {
-								public void run() {
-									MenuArcade.main(null);
+							ArrayList<String> datos = new ArrayList<String>();	
+							cargarFicheroUsuarios(datos, "usuarios.txt");
+							for (String string : datos) {
+								String[] nom = string.split(" ");
+								if (nom[1].equals(nombreUsuario.getText()) && nom[3].equals(contraseña.getText())) {
+									usuarioValido = true;
+									Thread t = new Thread () {
+										public void run() {
+											MenuArcade.main(null);
+										}
+									};
+									t.start(); 
+									dispose();
 								}
-							};
-							t.start(); 
-							dispose();
-						}
+							if(usuarioValido==false) {
+								JOptionPane.showMessageDialog(null, "Introduzca un nombre de usuario y contraseña existentes");
+							}
+							}
 						}
 					});	
 		}
