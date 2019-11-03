@@ -113,20 +113,36 @@ public class MenuLogin extends JFrame {
 			
 			bRegistro.addActionListener( 
 					new ActionListener() {
-						//private boolean usuarioValido;
+						private boolean usuarioValido=true;
 						Pattern patUsuario = Pattern.compile(UsuarioValido);
 						Pattern patContraseña = Pattern.compile(ContraseñaValida);
 
 						@Override
 						public void actionPerformed(ActionEvent e) {
 							if(patUsuario.matcher(nombreUsuario.getText()).matches() && patContraseña.matcher(contraseña.getText()).matches()) {
-								Thread t = new Thread () {
-									public void run() {
-											MenuArcade.main(null);
+								ArrayList<String> datos = new ArrayList<String>();
+								cargarFicheroUsuarios(datos, "usuarios.txt");
+								for (String string : datos) {
+									String[] nom = string.split(" ");
+									if (nom[1].equals(nombreUsuario.getText())) {
+										JOptionPane.showMessageDialog(null, "El nombre de usuario ya esta en uso");
+										usuarioValido = false;
 									}
-								};
-								t.start(); 
-								dispose();
+								}
+								if (usuarioValido!=false) {										
+									try {
+										usuarios = new PrintStream(new FileOutputStream("usuarios.txt", true));
+									} catch (Exception e1) {}
+									usuarios.println("Usuario: "+nombreUsuario.getText()+" Contraseña: "+contraseña.getText());
+									Thread t = new Thread () {
+										public void run() {
+												MenuArcade.main(null);
+										}
+									};
+									t.start(); 
+									dispose();
+								}
+								
 							}else if(patUsuario.matcher(nombreUsuario.getText()).matches()!=true){
 								JOptionPane.showMessageDialog(null, "Introduzca un usuario valido");
 							
@@ -135,9 +151,6 @@ public class MenuLogin extends JFrame {
 							
 							}
 							
-//							else if(contraseña.getText().isEmpty()) {
-//								JOptionPane.showMessageDialog(null, "Introduzca una contraseña");
-//							}
 //							
 //							else {
 //							ArrayList<String> l = new ArrayList<>();
@@ -201,11 +214,11 @@ public class MenuLogin extends JFrame {
 					Scanner fE = new Scanner( new FileInputStream( nombreFic ) );
 					while (fE.hasNext()) {
 						String linea = fE.nextLine();
-						// Trabajo con cada lÃ­nea
+						// Trabajo con cada linea
 						try {
 							l.add( linea );
 						} catch (Exception e) {
-							System.out.println( "Problema en la lÃ­nea " + linea );
+							System.out.println( "Problema en la linea " + linea );
 						}
 					}
 					fE.close();
