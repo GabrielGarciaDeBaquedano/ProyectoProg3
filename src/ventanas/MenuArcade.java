@@ -159,8 +159,16 @@ public class MenuArcade extends JFrame {
 				new ActionListener() { 
 					@Override
 					public void actionPerformed(ActionEvent e) {
-					dispose();}
-				});
+						Thread t = new Thread () {
+							public void run() {
+									MenuLogin
+									.main( null );		
+							}
+						};
+						t.start(); 
+						dispose();
+					}
+			});
 	}
 }
 
