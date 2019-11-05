@@ -169,6 +169,20 @@ public class MenuArcade extends JFrame {
 						dispose();
 					}
 			});
+		bEstadisticas.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Thread t = new Thread() {
+					public void run() {
+						VentanaEstadisticas.main(null);
+						
+					}
+				};
+				t.start();
+				dispose();
+			}
+		});
 	}
 }
 
