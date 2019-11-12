@@ -8,13 +8,19 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Scanner;
+import java.util.logging.FileHandler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Pattern;
 
 import javax.swing.BoxLayout;
@@ -30,6 +36,8 @@ import javax.swing.JTextField;
 public class MenuLogin extends JFrame {
 	
 	static PrintStream usuarios;
+	
+	static Logger log;
 
 		public static void main(String[] args) {
 			MenuLogin ml = new MenuLogin();
@@ -38,7 +46,7 @@ public class MenuLogin extends JFrame {
 		
 		private JTextField nombreUsuario;
 
-		private JTextField contraseña;
+		private JTextField contrase�a;
 
 
 		private JLabel titulo;
@@ -46,7 +54,7 @@ public class MenuLogin extends JFrame {
 		private JButton bIniciosesion;
 		private JLabel lGif;
 		private String UsuarioValido = "[a-zA-Z_0-9]{1,12}@[a-z]{5,12}.[a-z]{2,4}";
-		private String ContraseñaValida = "[a-zA-Z_0-9]{8,}";
+		private String Contrase�aValida = "[a-zA-Z_0-9]{8,}";
 		
 		private void posicionaLinea( Container p, String etiqueta, Component campo ) {
 			JPanel tempPanel = new JPanel();
@@ -65,9 +73,7 @@ public class MenuLogin extends JFrame {
 			lGif = new JLabel( new ImageIcon( "src/img/giphy.gif" ) );
 			nombreUsuario = new JTextField(20);
 
-			contraseña = new JPasswordField(17);
-
-			contraseña = new JPasswordField(17);
+			contrase�a = new JPasswordField(17);
 
 			titulo = new JLabel("ARCADE MACHINE");
 			
@@ -92,9 +98,7 @@ public class MenuLogin extends JFrame {
 			
 			pIzq.add(nombreUsuario);
 
-			pIzq.add(contraseña);
-
-			pIzq.add(contraseña);
+			pIzq.add(contrase�a);
 
 			pIzq.add(titulo);
 			
@@ -109,17 +113,17 @@ public class MenuLogin extends JFrame {
 			pIzq.add(panelContenidos);
 			posicionaLinea( panelContenidos, null, titulo );
 			posicionaLinea( panelContenidos, "Nick:", nombreUsuario );
-			posicionaLinea( panelContenidos, "Password:", contraseña );
+			posicionaLinea( panelContenidos, "Password:", contrase�a );
 			
 			bRegistro.addActionListener( 
 					new ActionListener() {
 						private boolean usuarioValido=true;
 						Pattern patUsuario = Pattern.compile(UsuarioValido);
-						Pattern patContraseña = Pattern.compile(ContraseñaValida);
+						Pattern patContrase�a = Pattern.compile(Contrase�aValida);
 
 						@Override
 						public void actionPerformed(ActionEvent e) {
-							if(patUsuario.matcher(nombreUsuario.getText()).matches() && patContraseña.matcher(contraseña.getText()).matches()) {
+							if(patUsuario.matcher(nombreUsuario.getText()).matches() && patContrase�a.matcher(contrase�a.getText()).matches()) {
 								ArrayList<String> datos = new ArrayList<String>();
 								cargarFicheroUsuarios(datos, "usuarios.txt");
 								for (String string : datos) {
@@ -133,7 +137,7 @@ public class MenuLogin extends JFrame {
 									try {
 										usuarios = new PrintStream(new FileOutputStream("usuarios.txt", true));
 									} catch (Exception e1) {}
-									usuarios.println("Usuario: "+nombreUsuario.getText()+" Contraseña: "+contraseña.getText());
+									usuarios.println("Usuario: "+nombreUsuario.getText()+" Contrase�a: "+contrase�a.getText());
 									Thread t = new Thread () {
 										public void run() {
 												MenuArcade.main(null);
@@ -146,8 +150,8 @@ public class MenuLogin extends JFrame {
 							}else if(patUsuario.matcher(nombreUsuario.getText()).matches()!=true){
 								JOptionPane.showMessageDialog(null, "Introduzca un usuario valido");
 							
-							}else if(patUsuario.matcher(contraseña.getText()).matches()!=true){
-								JOptionPane.showMessageDialog(null, "Introduzca una contraseña valida");
+							}else if(patUsuario.matcher(contrase�a.getText()).matches()!=true){
+								JOptionPane.showMessageDialog(null, "Introduzca una contrase�a valida");
 							
 							}		
 						}
@@ -162,7 +166,7 @@ public class MenuLogin extends JFrame {
 							cargarFicheroUsuarios(datos, "usuarios.txt");
 							for (String string : datos) {
 								String[] nom = string.split(" ");
-								if (nom[1].equals(nombreUsuario.getText()) && nom[3].equals(contraseña.getText())) {
+								if (nom[1].equals(nombreUsuario.getText()) && nom[3].equals(contrase�a.getText())) {
 									usuarioValido = true;
 									Thread t = new Thread () {
 										public void run() {
@@ -176,8 +180,28 @@ public class MenuLogin extends JFrame {
 								JOptionPane.showMessageDialog(null, "Introduzca un nombre de usuario y contraseña existentes");
 							}
 							}
+							try {
+								log = Logger.getLogger("login-logger");
+								log.addHandler(new FileHandler("Log.txt"));
+							} catch (SecurityException ex) {
+								// TODO Auto-generated catch block
+								ex.printStackTrace();
+							} catch (IOException ex) {
+								// TODO Auto-generated catch block
+								ex.printStackTrace();
+							}
+							log.log(Level.INFO, "Fecha de login " + (new Date()));
+							System.out.println("Abierto");
 						}
-					});	
+					});
+			
+			this.addWindowListener(new WindowAdapter() {
+				public void windowClosed(WindowEvent ev) {
+					log.log(Level.INFO, "Fecha logout " + (new Date()));
+					System.out.println("cerrado");
+				}
+				
+			});
 		}
 			
 			public static void cargarFicheroUsuarios( ArrayList<String> l, String nombreFic ) {
