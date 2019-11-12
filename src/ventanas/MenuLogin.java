@@ -190,7 +190,7 @@ public class MenuLogin extends JFrame {
 								// TODO Auto-generated catch block
 								ex.printStackTrace();
 							}
-							log.log(Level.INFO, "Fecha de login " + (new Date()));
+							log.log(Level.INFO, "Fecha de login " + nombreUsuario + (new Date()));
 							System.out.println("Abierto");
 						}
 					});
