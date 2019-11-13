@@ -71,6 +71,7 @@ public class MenuLogin extends JFrame {
 			setLocation( 250, 90 );
 			
 			lGif = new JLabel( new ImageIcon( "src/img/giphy.gif" ) );
+			
 			nombreUsuario = new JTextField(20);
 
 			contraseña = new JPasswordField(17);
@@ -94,7 +95,6 @@ public class MenuLogin extends JFrame {
 			BoxLayout layoutCentral = new BoxLayout( pCentral, BoxLayout.Y_AXIS );
 			pCentral.setLayout( layoutCentral );
 			getContentPane().add( lGif, BorderLayout.CENTER );
-			
 			
 			pIzq.add(nombreUsuario);
 
@@ -123,7 +123,7 @@ public class MenuLogin extends JFrame {
 
 						@Override
 						public void actionPerformed(ActionEvent e) {
-							if(patUsuario.matcher(nombreUsuario.getText()).matches() && patContraseña.matcher(contraseña.getText()).matches()) {
+							if(patUsuario.matcher(nombreUsuario.getText()).matches() && patContraseña.matcher(nombreUsuario.getText()).matches()) {
 								ArrayList<String> datos = new ArrayList<String>();
 								cargarFicheroUsuarios(datos, "usuarios.txt");
 								for (String string : datos) {
