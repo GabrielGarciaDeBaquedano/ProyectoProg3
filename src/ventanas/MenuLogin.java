@@ -46,7 +46,7 @@ public class MenuLogin extends JFrame {
 		
 		private JTextField nombreUsuario;
 
-		private JTextField contraseña;
+		private JTextField contrasenya;
 
 
 		private JLabel titulo;
@@ -54,7 +54,7 @@ public class MenuLogin extends JFrame {
 		private JButton bIniciosesion;
 		private JLabel lGif;
 		private String UsuarioValido = "[a-zA-Z_0-9]{1,12}@[a-z]{5,12}.[a-z]{2,4}";
-		private String ContraseñaValida = "[a-zA-Z_0-9]{8,}";
+		private String ContrasenyaValida = "[a-zA-Z_0-9]{8,}";
 		
 		private void posicionaLinea( Container p, String etiqueta, Component campo ) {
 			JPanel tempPanel = new JPanel();
@@ -74,7 +74,7 @@ public class MenuLogin extends JFrame {
 			
 			nombreUsuario = new JTextField(20);
 
-			contraseña = new JPasswordField(17);
+			contrasenya = new JPasswordField(17);
 
 			titulo = new JLabel("ARCADE MACHINE");
 			
@@ -98,7 +98,7 @@ public class MenuLogin extends JFrame {
 			
 			pIzq.add(nombreUsuario);
 
-			pIzq.add(contraseña);
+			pIzq.add(contrasenya);
 
 			pIzq.add(titulo);
 			
@@ -113,17 +113,17 @@ public class MenuLogin extends JFrame {
 			pIzq.add(panelContenidos);
 			posicionaLinea( panelContenidos, null, titulo );
 			posicionaLinea( panelContenidos, "Nick:", nombreUsuario );
-			posicionaLinea( panelContenidos, "Password:", contraseña );
+			posicionaLinea( panelContenidos, "Password:", contrasenya );
 			
 			bRegistro.addActionListener( 
 					new ActionListener() {
 						private boolean usuarioValido=true;
 						Pattern patUsuario = Pattern.compile(UsuarioValido);
-						Pattern patContraseña = Pattern.compile(ContraseñaValida);
+						Pattern patContrasenya = Pattern.compile(ContrasenyaValida);
 
 						@Override
 						public void actionPerformed(ActionEvent e) {
-							if(patUsuario.matcher(nombreUsuario.getText()).matches() && patContraseña.matcher(nombreUsuario.getText()).matches()) {
+							if(patUsuario.matcher(nombreUsuario.getText()).matches() && patContrasenya.matcher(nombreUsuario.getText()).matches()) {
 								ArrayList<String> datos = new ArrayList<String>();
 								cargarFicheroUsuarios(datos, "usuarios.txt");
 								for (String string : datos) {
@@ -137,7 +137,7 @@ public class MenuLogin extends JFrame {
 									try {
 										usuarios = new PrintStream(new FileOutputStream("usuarios.txt", true));
 									} catch (Exception e1) {}
-									usuarios.println("Usuario: "+nombreUsuario.getText()+" Contraseña: "+contraseña.getText());
+									usuarios.println("Usuario: "+nombreUsuario.getText()+" Contrasenya: "+contrasenya.getText());
 									Thread t = new Thread () {
 										public void run() {
 												MenuArcade.main(null);
@@ -150,8 +150,8 @@ public class MenuLogin extends JFrame {
 							}else if(patUsuario.matcher(nombreUsuario.getText()).matches()!=true){
 								JOptionPane.showMessageDialog(null, "Introduzca un usuario valido");
 							
-							}else if(patUsuario.matcher(contraseña.getText()).matches()!=true){
-								JOptionPane.showMessageDialog(null, "Introduzca una contraseña valida");
+							}else if(patUsuario.matcher(contrasenya.getText()).matches()!=true){
+								JOptionPane.showMessageDialog(null, "Introduzca una contrasenya valida");
 							
 							}		
 						}
@@ -166,7 +166,7 @@ public class MenuLogin extends JFrame {
 							cargarFicheroUsuarios(datos, "usuarios.txt");
 							for (String string : datos) {
 								String[] nom = string.split(" ");
-								if (nom[1].equals(nombreUsuario.getText()) && nom[3].equals(contraseña.getText())) {
+								if (nom[1].equals(nombreUsuario.getText()) && nom[3].equals(contrasenya.getText())) {
 									usuarioValido = true;
 									Thread t = new Thread () {
 										public void run() {
