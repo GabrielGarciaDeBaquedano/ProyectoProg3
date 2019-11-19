@@ -29,6 +29,11 @@ public class JuegoAsteroids {
 	private static double VEL_JUEGO = 1.0;            // 1.0 = tiempo real. Cuando mayor, más rápido pasa el tiempo y viceversa 
 	private static Random random;                     // Generador de aleatorios para creación de asteroides
 	private static int puntuacion;                       // Variable para puntuación
+	protected static double numDisp;				  // Disparos realizados
+	protected static double numImp;					  // Disparos impactados
+	protected static float porcentajeImp;			  // Porcentaje de disparos impactados
+	protected static long tiempoFin;
+	protected static long tiempoInicio;
 	
 	public static void main(String[] args) {
 		JuegoAsteroids juego = new JuegoAsteroids();
@@ -50,6 +55,7 @@ public class JuegoAsteroids {
 		puntuacion = 0;
 		random = new Random();
 		vent = new VentanaGrafica( 1200, 600, "Asteroids" );
+		tiempoInicio = System.currentTimeMillis();
 		crearNaves();
 		mover();
 	}
@@ -105,6 +111,7 @@ public class JuegoAsteroids {
 									Audio.lanzaAudioEnHilo("src/wav/Disparo.wav");
 									disparos.add(nave.dispara());
 									System.out.println(disparos);
+									numDisp++;
 								}
 						}		
 					}
@@ -153,6 +160,7 @@ public class JuegoAsteroids {
 							// Puntua cada asteroide que destrozamos
 					Audio.lanzaAudioEnHilo("src/wav/derrota.wav");
 							System.out.println("choque de nave y ast " + nave +" "+ ast);
+							tiempoFin = System.currentTimeMillis();
 							vent.espera(2000);
 							Thread t = new Thread () {
 								public void run() {
@@ -162,6 +170,8 @@ public class JuegoAsteroids {
 							};
 							t.start(); 
 							vent.acaba();
+							double tiempoJuego = (tiempoFin-tiempoInicio)/1000.00;
+							System.out.println("Estadisticas:\n"+"Disparos realizados: "+numDisp+"\n"+"Disparos impactados: "+numImp+"\n"+"Porcentaje disparos impactados: "+(numImp/numDisp)*100+"% \n"+"Tiempo de juego: "+tiempoJuego+"s");
 							}
 						}
 					}
@@ -173,6 +183,7 @@ public class JuegoAsteroids {
 							System.out.println("choque de disparo y ast " + dis +" "+ ast);
 							Audio.lanzaAudioEnHilo("src/"
 									+ "wav/impacto.wav");
+							numImp++;
 							if(ast.getImp_rest()>1){
 								if(ast.getImp_rest()>2){
 									puntuacion ++;
