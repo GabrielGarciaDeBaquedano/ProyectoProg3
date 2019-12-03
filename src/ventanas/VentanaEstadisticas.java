@@ -1,6 +1,8 @@
 package ventanas;
 
 import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -19,6 +21,7 @@ public class VentanaEstadisticas extends JFrame {
 	private  static JButton bPong;
 	private static JButton bAsteroids;
 	private static JButton bFlappyCar;
+	private static JButton bVolver;
 	
 	public  VentanaEstadisticas() {
 
@@ -31,12 +34,29 @@ public class VentanaEstadisticas extends JFrame {
 		bPong = new JButton("Pong" );
 		bAsteroids = new JButton("Asteroids");
 		bFlappyCar = new JButton("Flappy Car");
+		bVolver = new JButton("Volver ");
 		
 		escogerJuego.add(estadisticasJuegos, BorderLayout.NORTH);
 		escogerJuego.add(bAsteroids);
 		escogerJuego.add(bPong );
 		escogerJuego.add(bFlappyCar);
+		escogerJuego.add(bVolver);
 		getContentPane().add(escogerJuego, BorderLayout.WEST);
+		
+		bVolver.addActionListener( 
+				new ActionListener() { 
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						Thread t = new Thread () {
+							public void run() {
+									MenuArcade
+									.main( null );		
+							}
+						};
+						t.start(); 
+						dispose();
+					}
+			});
 		
 	}
 	public static void main(String arg0) {
@@ -44,7 +64,9 @@ public class VentanaEstadisticas extends JFrame {
 		v.setVisible(true);
 		
 	}
-		
+	
+	
+	
 		
 		
 	
