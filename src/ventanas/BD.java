@@ -40,7 +40,7 @@ public class BD {
 		try {
 			Statement st = con.createStatement();
 			try {
-				String sent = "insert into Jugador(idJugador, nombreJugador) values(1," + nombreJugador +" );";
+				String sent = "insert into Jugador(idJugador, nombreJugador) values(," + nombreJugador +" );";
 				
 				
 			}catch(Exception e) {
