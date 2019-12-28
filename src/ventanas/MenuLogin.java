@@ -125,7 +125,7 @@ public class MenuLogin extends JFrame {
 						
 						@Override
 						public void actionPerformed(ActionEvent e) {
-							if(patUsuario.matcher(nombreUsuario.getText()).matches() && patContrasenya.matcher(nombreUsuario.getText()).matches()) {
+							if(patUsuario.matcher(nombreUsuario.getText()).matches() && patContrasenya.matcher(contrasenya.getText()).matches()) {
 								ArrayList<String> datos = new ArrayList<String>();
 								cargarFicheroUsuarios(datos, "usuarios.txt");
 								for (String string : datos) {
@@ -153,7 +153,7 @@ public class MenuLogin extends JFrame {
 							}else if(patUsuario.matcher(nombreUsuario.getText()).matches()!=true){
 								JOptionPane.showMessageDialog(null, "Introduzca un usuario valido");
 							
-							}else if(patUsuario.matcher(contrasenya.getText()).matches()!=true){
+							}else if(patContrasenya.matcher(contrasenya.getText()).matches()!=true){
 								JOptionPane.showMessageDialog(null, "Introduzca una contrasenya valida");
 							
 							}		
@@ -179,9 +179,9 @@ public class MenuLogin extends JFrame {
 									t.start(); 
 									dispose();
 								}
+							}
 							if(usuarioValido==false) {
 								JOptionPane.showMessageDialog(null, "Introduzca un nombre de usuario y contraseña existentes");
-							}
 							}
 							try {
 								log = Logger.getLogger("login-logger");
