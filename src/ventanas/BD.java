@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -36,19 +37,26 @@ public class BD {
 	}
 	
 
-	private static void insertarJugador( String nombreJugador) {
-		try {
-			Statement st = con.createStatement();
+	public static void insertarJugador( String nombreJugador) {
 			try {
-				String sent = "insert into Jugador(idJugador, nombreJugador) values(," + nombreJugador +" );";
-				
-				
-			}catch(Exception e) {
-				}
-		
-		}catch( Exception e ) {
+				Statement stmt = con.createStatement();
+				String sentSQL = "insert into Jugador(idJugador, nombreJugador) values(," + nombreJugador +" );";
+				stmt.executeUpdate(sentSQL);
+			}
+		catch( Exception e ) {
 						e.printStackTrace();
 						JOptionPane.showInputDialog("No se ha podido recorrer la lista de jugadores!",  JOptionPane.WARNING_MESSAGE);
+		}
+	}
+	
+	public static void insertarPartida( String puntuacion, float tiempoJuego) {
+		try {
+			Statement stmt = con.createStatement();
+			String sentSQL = "insert into Partida(codigo, puntuacion, tiempoJuego, fecha) values(," + puntuacion + tiempoJuego + System.currentTimeMillis() + " );";
+			stmt.executeUpdate(sentSQL);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 	

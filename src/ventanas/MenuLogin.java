@@ -1,6 +1,7 @@
 package ventanas;
 
 import java.awt.BorderLayout;
+
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;
@@ -32,7 +33,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-
+import ventanas.BD;
 public class MenuLogin extends JFrame {
 	
 	static PrintStream usuarios;
@@ -116,11 +117,12 @@ public class MenuLogin extends JFrame {
 			posicionaLinea( panelContenidos, "Password:", contrasenya );
 			
 			bRegistro.addActionListener( 
+					
 					new ActionListener() {
 						private boolean usuarioValido=true;
 						Pattern patUsuario = Pattern.compile(UsuarioValido);
 						Pattern patContrasenya = Pattern.compile(ContrasenyaValida);
-
+						
 						@Override
 						public void actionPerformed(ActionEvent e) {
 							if(patUsuario.matcher(nombreUsuario.getText()).matches() && patContrasenya.matcher(nombreUsuario.getText()).matches()) {
@@ -133,7 +135,8 @@ public class MenuLogin extends JFrame {
 										usuarioValido = false;
 									}
 								}
-								if (usuarioValido!=false) {										
+								if (usuarioValido!=false) {
+									BD.insertarJugador(nombreUsuario.getText());
 									try {
 										usuarios = new PrintStream(new FileOutputStream("usuarios.txt", true));
 									} catch (Exception e1) {}
