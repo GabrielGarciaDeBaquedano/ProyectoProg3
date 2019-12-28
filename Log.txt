@@ -2,36 +2,25 @@
 <!DOCTYPE log SYSTEM "logger.dtd">
 <log>
 <record>
-  <date>2019-12-28T17:59:58</date>
-  <millis>1577552398670</millis>
+  <date>2019-12-28T19:04:55</date>
+  <millis>1577556295381</millis>
   <sequence>0</sequence>
   <logger>login-logger</logger>
   <level>INFO</level>
   <class>ventanas.MenuLogin$2</class>
   <method>actionPerformed</method>
   <thread>16</thread>
-  <message>Fecha de login javax.swing.JTextField[,38,5,224x20,invalid,layout=javax.swing.plaf.basic.BasicTextUI$UpdateHandler,alignmentX=0.0,alignmentY=0.0,border=javax.swing.plaf.BorderUIResource$CompoundBorderUIResource@50799cff,flags=296,maximumSize=,minimumSize=,preferredSize=,caretColor=sun.swing.PrintColorUIResource[r=51,g=51,b=51],disabledTextColor=javax.swing.plaf.ColorUIResource[r=184,g=207,b=229],editable=true,margin=javax.swing.plaf.InsetsUIResource[top=0,left=0,bottom=0,right=0],selectedTextColor=sun.swing.PrintColorUIResource[r=51,g=51,b=51],selectionColor=javax.swing.plaf.ColorUIResource[r=184,g=207,b=229],columns=20,columnWidth=11,command=,horizontalAlignment=LEADING]Sat Dec 28 17:59:58 CET 2019</message>
+  <message>Fecha de login javax.swing.JTextField[,38,5,224x20,layout=javax.swing.plaf.basic.BasicTextUI$UpdateHandler,alignmentX=0.0,alignmentY=0.0,border=javax.swing.plaf.BorderUIResource$CompoundBorderUIResource@68c4c0d4,flags=296,maximumSize=,minimumSize=,preferredSize=,caretColor=sun.swing.PrintColorUIResource[r=51,g=51,b=51],disabledTextColor=javax.swing.plaf.ColorUIResource[r=184,g=207,b=229],editable=true,margin=javax.swing.plaf.InsetsUIResource[top=0,left=0,bottom=0,right=0],selectedTextColor=sun.swing.PrintColorUIResource[r=51,g=51,b=51],selectionColor=javax.swing.plaf.ColorUIResource[r=184,g=207,b=229],columns=20,columnWidth=11,command=,horizontalAlignment=LEADING]Sat Dec 28 19:04:55 CET 2019</message>
 </record>
 <record>
-  <date>2019-12-28T17:59:58</date>
-  <millis>1577552398679</millis>
+  <date>2019-12-28T19:11:09</date>
+  <millis>1577556669382</millis>
   <sequence>1</sequence>
   <logger>login-logger</logger>
   <level>INFO</level>
   <class>ventanas.MenuLogin$3</class>
   <method>windowClosed</method>
   <thread>16</thread>
-  <message>Fecha logout Sat Dec 28 17:59:58 CET 2019</message>
-</record>
-<record>
-  <date>2019-12-28T18:00:01</date>
-  <millis>1577552401396</millis>
-  <sequence>2</sequence>
-  <logger>login-logger</logger>
-  <level>INFO</level>
-  <class>ventanas.MenuLogin$3</class>
-  <method>windowClosed</method>
-  <thread>16</thread>
-  <message>Fecha logout Sat Dec 28 18:00:01 CET 2019</message>
+  <message>Fecha logout Sat Dec 28 19:11:09 CET 2019</message>
 </record>
 </log>

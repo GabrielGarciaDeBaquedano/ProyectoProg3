@@ -58,6 +58,21 @@ public class VentanaEstadisticas extends JFrame {
 					}
 			});
 		
+		bAsteroids.addActionListener( 
+				new ActionListener() { 
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						Thread t = new Thread () {
+							public void run() {
+									//EstatsAsteroids
+									//.main( null );		
+							}
+						};
+						t.start(); 
+						dispose();
+					}
+			});
+		
 	}
 	public static void main(String arg0) {
 		VentanaEstadisticas v = new VentanaEstadisticas();

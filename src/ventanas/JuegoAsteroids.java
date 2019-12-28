@@ -3,12 +3,22 @@ package ventanas;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.KeyEvent;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.Scanner;
+
+import java.util.Date;
+
+import org.omg.CORBA.Current;
 
 import objetosJuego.Asteroide;
 import objetosJuego.Disparo;
 import objetosJuego.Nave;
+//import sun.util.calendar.BaseCalendar.Date;
 import utils.Audio;
 import utils.Rotable;
 import utils.VentanaGrafica;
@@ -18,6 +28,8 @@ import utils.VentanaGrafica;
  * @author andoni.eguiluz @ ingenieria.deusto.es
  */
 public class JuegoAsteroids {
+	
+	static PrintStream estats;
 
 	private static final long MSGS_POR_FRAME = 20;    // 20 msgs por frame = 50 frames por segundo aprox
 	private static final int RADIO_AST = 40;           
@@ -172,6 +184,11 @@ public class JuegoAsteroids {
 							vent.acaba();
 							double tiempoJuego = (tiempoFin-tiempoInicio)/1000.00;
 							System.out.println("Estadisticas:\n"+"Disparos realizados: "+numDisp+"\n"+"Disparos impactados: "+numImp+"\n"+"Porcentaje disparos impactados: "+(numImp/numDisp)*100+"% \n"+"Tiempo de juego: "+tiempoJuego+"s");
+							try {
+								estats = new PrintStream(new FileOutputStream("estadisticasAsteroids.txt", true));
+							} catch (Exception e1) {}
+							
+							estats.println("ID partida: "+(new Date())+" Nick jugador: "+MenuLogin.getNick()+"Disparos realizados: "+numDisp+" Disparos impactados: "+numImp+" Porcentaje disparos impactados: "+(numImp/numDisp)*100+"% Tiempo de juego: "+tiempoJuego+"s");
 							}
 						}
 					}

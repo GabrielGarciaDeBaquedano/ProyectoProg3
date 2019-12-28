@@ -45,7 +45,7 @@ public class MenuLogin extends JFrame {
 			ml.setVisible(true);
 		}
 		
-		private JTextField nombreUsuario;
+		private static JTextField nombreUsuario;
 
 		private JTextField contrasenya;
 
@@ -223,6 +223,10 @@ public class MenuLogin extends JFrame {
 				} catch (IOException e) {
 					System.out.println( "No ha sido posible leer el fichero." );
 				}
+			}
+			
+			public static String getNick() {
+				return nombreUsuario.getText();
 			}
 		
 }
