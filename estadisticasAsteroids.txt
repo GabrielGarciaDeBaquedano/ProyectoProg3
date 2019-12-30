@@ -1,1 +1,1 @@
-ID partida: Sat Dec 28 19:05:23 CET 2019 Nick jugador: ggbaque@gmail.comDisparos realizados: 15.0 Disparos impactados: 7.0 Porcentaje disparos impactados: 46.666666666666664% Tiempo de juego: 7.485s
+ID partida: Sat Dec 28 19:05:23 CET 2019 Nick jugador: ggbaque@gmail.com Disparos realizados: 15 Disparos impactados: 7 Porcentaje disparos impactados: 46.666666666666664% Tiempo de juego: 7.485s

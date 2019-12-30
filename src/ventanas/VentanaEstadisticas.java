@@ -64,8 +64,7 @@ public class VentanaEstadisticas extends JFrame {
 					public void actionPerformed(ActionEvent e) {
 						Thread t = new Thread () {
 							public void run() {
-									//EstatsAsteroids
-									//.main( null );		
+									EstatsAsteroids.main( null );		
 							}
 						};
 						t.start(); 

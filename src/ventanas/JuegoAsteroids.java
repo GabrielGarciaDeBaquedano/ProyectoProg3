@@ -41,8 +41,8 @@ public class JuegoAsteroids {
 	private static double VEL_JUEGO = 1.0;            // 1.0 = tiempo real. Cuando mayor, más rápido pasa el tiempo y viceversa 
 	private static Random random;                     // Generador de aleatorios para creación de asteroides
 	private static int puntuacion;                       // Variable para puntuación
-	protected static double numDisp;				  // Disparos realizados
-	protected static double numImp;					  // Disparos impactados
+	protected static int numDisp;				  // Disparos realizados
+	protected static int numImp;					  // Disparos impactados
 	protected static float porcentajeImp;			  // Porcentaje de disparos impactados
 	protected static long tiempoFin;
 	protected static long tiempoInicio;
@@ -188,7 +188,7 @@ public class JuegoAsteroids {
 								estats = new PrintStream(new FileOutputStream("estadisticasAsteroids.txt", true));
 							} catch (Exception e1) {}
 							
-							estats.println("ID partida: "+(new Date())+" Nick jugador: "+MenuLogin.getNick()+"Disparos realizados: "+numDisp+" Disparos impactados: "+numImp+" Porcentaje disparos impactados: "+(numImp/numDisp)*100+"% Tiempo de juego: "+tiempoJuego+"s");
+							estats.println("ID partida: "+(new Date())+" Nick jugador: "+MenuLogin.getNick()+" Disparos realizados: "+numDisp+" Disparos impactados: "+numImp+" Porcentaje disparos impactados: "+(numImp/numDisp)*100+"% Tiempo de juego: "+tiempoJuego+"s");
 							}
 						}
 					}
