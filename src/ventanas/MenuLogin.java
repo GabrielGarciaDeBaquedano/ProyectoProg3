@@ -136,7 +136,7 @@ public class MenuLogin extends JFrame {
 									}
 								}
 								if (usuarioValido!=false) {
-									BD.insertarJugador(nombreUsuario.getText());
+									//BD.insertarJugador(nombreUsuario.getText());
 									try {
 										usuarios = new PrintStream(new FileOutputStream("usuarios.txt", true));
 									} catch (Exception e1) {}
@@ -193,7 +193,7 @@ public class MenuLogin extends JFrame {
 								// TODO Auto-generated catch block
 								ex.printStackTrace();
 							}
-							log.log(Level.INFO, "Fecha de login " + nombreUsuario + (new Date()));
+							log.log(Level.INFO, "Fecha de login " + (new Date()));
 							System.out.println("Abierto");
 						}
 					});

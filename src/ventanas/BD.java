@@ -1,6 +1,7 @@
 package ventanas;
 
 import java.sql.Connection;
+import ventanas.Jugador;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -37,10 +38,11 @@ public class BD {
 	}
 	
 
-	public static void insertarJugador( String nombreJugador) {
+	public static void insertarJugador(Jugador jugador) {
 			try {
 				Statement stmt = con.createStatement();
-				String sentSQL = "insert into Jugador(idJugador, nombreJugador) values(," + nombreJugador +" );";
+				String sentSQL = "insert into Jugador(idJugador, nombreJugador) values(" + "'" + jugador.getIdJugador()
+				+ "', " + jugador.getNombreJugador();
 				stmt.executeUpdate(sentSQL);
 			}
 		catch( Exception e ) {
