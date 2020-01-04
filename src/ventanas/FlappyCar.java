@@ -197,8 +197,8 @@ public class FlappyCar implements Runnable {
 							v.showMessage( "Siguiente Nivel !!! Nivel " + nivel );
 						}
 						
-						if (po.estoyMuerto()==true){
-							Partida partida = new Partida(0 , MenuLogin.getNick(), "FlappyCar", columnasPasadas, System.currentTimeMillis() - comienzo, System.currentTimeMillis());
+						if (po.estoyMuerto()==true){ 
+							Partida partida = new Partida(1 , MenuLogin.getNick(), "FlappyCar", columnasPasadas, System.currentTimeMillis() - comienzo, System.currentTimeMillis());
 							BD.insertarPartida(partida);
 							String nombreUsuario = JOptionPane.showInputDialog("Introduce tu nombre: ");
 							Record nuevo = new Record(nombreUsuario, columnasPasadas);
