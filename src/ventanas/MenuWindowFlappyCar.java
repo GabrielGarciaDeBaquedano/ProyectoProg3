@@ -1,18 +1,18 @@
 package ventanas;
-
+import ventanas.MenuLogin;
 import java.awt.*;
 
 
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Date;
 
 import javax.swing.*;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.LineBorder;
 
-import utils.FlappyCar;
 import utils.FlappyRecords;
 import utils.FileManager;
 import utils.Score;
@@ -23,7 +23,7 @@ public class MenuWindowFlappyCar extends JFrame implements ActionListener {
 	private JButton Record = new JButton();
 	private JButton Comienzo = new JButton();
 	private JButton Exit = new JButton();
- private void initComponents() {
+ public void initComponents() {
         panelFondo = new CargaImagenMenuFlappyCar();        
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setTitle("MENU DE FLAPPYCAR");

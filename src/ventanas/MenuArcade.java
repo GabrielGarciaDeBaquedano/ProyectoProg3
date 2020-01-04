@@ -13,8 +13,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import utils.FlappyCar;
-
 public class MenuArcade extends JFrame {
 
 	public static void main(String[] args) {

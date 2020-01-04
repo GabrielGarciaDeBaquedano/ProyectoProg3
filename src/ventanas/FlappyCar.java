@@ -1,16 +1,20 @@
-package utils;
+package ventanas;
 
 import java.util.*;
+
 import img.Img;
 import objetosJuego.Coche;
 import objetosJuego.ColumnaCars;
 import objetosJuego.GrupoObjetosFlappyCar;
 import objetosJuego.ObjetoGrafico;
+import utils.Constantes;
+import utils.EventoRaton;
+import utils.EventoVentana;
 import utils.FileManager;
+import utils.FlappyRecords;
+import utils.RatonPulsado;
+import utils.Record;
 import utils.Score;
-import ventanas.MenuWindowFlappyCar;
-import ventanas.VentanaGraficaFlappyCar;
-import ventanas.VentanaInicioFlappyCar;
 
 import javax.swing.JOptionPane;
 
@@ -136,7 +140,7 @@ public class FlappyCar implements Runnable {
 				menu.setLocationRelativeTo(null);
 			}
 			public void run() {	
-
+				long comienzo = System.currentTimeMillis();
 				v = new VentanaGraficaFlappyCar(pxAnchuraVent, pxAlturaVent, 0, true, true, false, "FlappyCar" );v.setVisible(true);
 				v.setFondoAnimado(new ObjetoGrafico( Img.getURLRecurso( "Fondo8.jpg" ), true ),
 				new ObjetoGrafico( Img.getURLRecurso( "Fondo8.jpg" ), true ), 1 );
@@ -194,6 +198,8 @@ public class FlappyCar implements Runnable {
 						}
 						
 						if (po.estoyMuerto()==true){
+							Partida partida = new Partida(0 , MenuLogin.getNick(), "FlappyCar", columnasPasadas, System.currentTimeMillis() - comienzo, System.currentTimeMillis());
+							BD.insertarPartida(partida);
 							String nombreUsuario = JOptionPane.showInputDialog("Introduce tu nombre: ");
 							Record nuevo = new Record(nombreUsuario, columnasPasadas);
 							ArrayList<Record> aRecords = FlappyRecords.volcarFicheroAArrayList(Constantes.NF_RECORDS);

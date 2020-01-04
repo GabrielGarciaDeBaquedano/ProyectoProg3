@@ -21,7 +21,6 @@ import javax.swing.JButton;
 import utils.Constantes;
 import utils.FlappyRecords;
 import utils.Record;
-import utils.FlappyCar;
 import img.Img;
 import objetosJuego.ObjetoGrafico;
 import utils.FileManager;

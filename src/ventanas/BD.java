@@ -13,8 +13,6 @@ import java.util.concurrent.ArrayBlockingQueue;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javax.swing.JOptionPane;
-
 
 public class BD {
 	
@@ -52,10 +50,16 @@ public class BD {
 		}
 	}
 	
-	public static boolean insertarPartida( String puntuacion, float tiempoJuego) {
+	public static boolean insertarPartida( Partida partida) {
 		try {
 			Statement stmt = con.createStatement();
-			String sentSQL = "insert into Partida(codigo, puntuacion, tiempoJuego, fecha) values(," + puntuacion + tiempoJuego + System.currentTimeMillis() + " );";
+			String sentSQL = "insert into Partida(codigo, nombreJugador, nombreJuego, puntuacion, tiempoJuego, fecha) values(,"
+			+ partida.getCodPartida()
+			+ partida.getNombreJugador()
+			+ partida.getNombreJuego()
+			+ partida.getPuntuacion()
+			+ partida.getTiempoPartida() 
+			+ partida.getFechaPartida() + " );";
 			stmt.executeUpdate(sentSQL);
 			return true;
 		} catch (SQLException e) {

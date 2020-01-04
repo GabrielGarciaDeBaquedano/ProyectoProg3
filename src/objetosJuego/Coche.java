@@ -1,7 +1,8 @@
 package objetosJuego;
 
 import java.awt.Point;
-import utils.FlappyCar;
+
+import ventanas.FlappyCar;
 import ventanas.VentanaGraficaFlappyCar;
 import img.*;
  public class Coche extends ObjetoFlappyCar{
