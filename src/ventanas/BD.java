@@ -1,6 +1,7 @@
 package ventanas;
 
 import java.sql.Connection;
+
 import ventanas.Jugador;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -20,20 +21,19 @@ public class BD {
 	protected static Connection con;	
 	private static Logger logger = null;
 	
-	public static boolean initBD( String nombreBD ) {
+	public static Connection initBD( String nombreBD ) {
 		try {
 		    Class.forName("org.sqlite.JDBC");
 		    con = DriverManager.getConnection("jdbc:sqlite:" + nombreBD );
 			log( Level.INFO, "Conectada base de datos " + nombreBD, null );
 			Statement st = con.createStatement();
-			st.executeUpdate("CREATE TABLE IF NOT EXISTS Jugador(idJugador INTEGER PRIMARY KEY AUTOINCREMENT,  nombreJugador VARCHAR(100);");
-			st.executeUpdate("CREATE TABLE IF NOT EXISTS Partida(codPartida INTEGER PRIMARY KEY AUTOINCREMENT,  puntuacion INTEGER, tiempoPartida DECIMAL(5, 2), fechaPartida DATE ;");
-			st.executeUpdate("CREATE TABLE IF NOT EXISTS Juego(idJuego INTEGER PRIMARY KEY AUTOINCREMENT,  nombreJuego VARCHAR(100);");
-			
-		    return true;
+			st.executeUpdate("CREATE TABLE IF NOT EXISTS Jugador(nombreJugador VARCHAR(100) PRIMARY KEY;");
+			st.executeUpdate("CREATE TABLE IF NOT EXISTS Partida(codPartida INTEGER PRIMARY KEY AUTOINCREMENT, nombreJugador VARCHAR(100), nombreJuego VARCHAR(100),  puntuacion INTEGER, tiempoPartida DECIMAL(5, 2), fechaPartida DATE ;");
+			st.executeUpdate("CREATE TABLE IF NOT EXISTS Juego(nombreJuego VARCHAR(100) PRIMARY KEY;");
+		    return con;
 		} catch (ClassNotFoundException | SQLException e) {
 			log( Level.SEVERE, "Error en conexi�n de base de datos " + nombreBD, e );
-			return false;
+			return null;
 		}
 	}
 	
@@ -41,8 +41,6 @@ public class BD {
 	public static boolean insertarJugador(Jugador jugador) {
 			try {
 				Statement stmt = con.createStatement();
-				//String sentSQL = "insert into Jugador(idJugador, nombreJugador) values(" + "'" + jugador.getIdJugador()
-				//+ "', " + jugador.getNombreJugador();
 				String sentSQL = "insert into Jugador(nombreJugador) values(" + "'"
 				+ jugador.getNombreJugador();
 				stmt.executeUpdate(sentSQL);

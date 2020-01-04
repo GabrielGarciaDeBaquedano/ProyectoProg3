@@ -205,6 +205,10 @@ public class MenuLogin extends JFrame {
 					log.log(Level.INFO, "Fecha logout " + (new Date()));
 					System.out.println("cerrado");
 				}
+				 public void windowActivated(WindowEvent ev) {
+					 BD.initBD("Arcade");
+					 System.out.println("BD abierta");
+				 }
 				
 			});
 		}
