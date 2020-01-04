@@ -125,8 +125,6 @@ public class MenuLogin extends JFrame {
 						
 						@Override
 						public void actionPerformed(ActionEvent e) {
-							Jugador jugador;
-							String nombre = nombreUsuario.getText();
 							if(patUsuario.matcher(nombreUsuario.getText()).matches() && patContrasenya.matcher(contrasenya.getText()).matches()) {
 								ArrayList<String> datos = new ArrayList<String>();
 								cargarFicheroUsuarios(datos, "usuarios.txt");
@@ -138,8 +136,9 @@ public class MenuLogin extends JFrame {
 									}
 								}
 								if (usuarioValido!=false) {
-									//jugador = new Jugador(nombre);
-									//BD.insertarJugador(nombreUsuario.getText());
+									Jugador jugador = new Jugador(nombreUsuario.getText());
+									BD.insertarJugador(jugador);
+									System.out.println("Jugador añadido");
 									try {
 										usuarios = new PrintStream(new FileOutputStream("usuarios.txt", true));
 									} catch (Exception e1) {}

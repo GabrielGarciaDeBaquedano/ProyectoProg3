@@ -38,27 +38,32 @@ public class BD {
 	}
 	
 
-	public static void insertarJugador(Jugador jugador) {
+	public static boolean insertarJugador(Jugador jugador) {
 			try {
 				Statement stmt = con.createStatement();
-				String sentSQL = "insert into Jugador(idJugador, nombreJugador) values(" + "'" + jugador.getIdJugador()
-				+ "', " + jugador.getNombreJugador();
+				//String sentSQL = "insert into Jugador(idJugador, nombreJugador) values(" + "'" + jugador.getIdJugador()
+				//+ "', " + jugador.getNombreJugador();
+				String sentSQL = "insert into Jugador(nombreJugador) values(" + "'"
+				+ jugador.getNombreJugador();
 				stmt.executeUpdate(sentSQL);
+				return true;
 			}
 		catch( Exception e ) {
 						e.printStackTrace();
-						JOptionPane.showInputDialog("No se ha podido recorrer la lista de jugadores!",  JOptionPane.WARNING_MESSAGE);
+						return false;
 		}
 	}
 	
-	public static void insertarPartida( String puntuacion, float tiempoJuego) {
+	public static boolean insertarPartida( String puntuacion, float tiempoJuego) {
 		try {
 			Statement stmt = con.createStatement();
 			String sentSQL = "insert into Partida(codigo, puntuacion, tiempoJuego, fecha) values(," + puntuacion + tiempoJuego + System.currentTimeMillis() + " );";
 			stmt.executeUpdate(sentSQL);
+			return true;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return false;
 		}
 	}
 	
