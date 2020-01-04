@@ -136,6 +136,7 @@ public class MenuLogin extends JFrame {
 									}
 								}
 								if (usuarioValido!=false) {
+									//Añadir un jugador a la bd
 									Jugador jugador = new Jugador(nombreUsuario.getText());
 									BD.insertarJugador(jugador);
 									System.out.println("Jugador añadido");
@@ -206,7 +207,7 @@ public class MenuLogin extends JFrame {
 					System.out.println("cerrado");
 				}
 				 public void windowActivated(WindowEvent ev) {
-					 BD.initBD("Arcade");
+					 BD.initBD("Arcade.sql");
 					 System.out.println("BD abierta");
 				 }
 				
