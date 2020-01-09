@@ -67,7 +67,7 @@ public class MenuLogin extends JFrame {
 		
 		public MenuLogin() {
 			setTitle("Menu de Login");
-			setDefaultCloseOperation( JFrame.DISPOSE_ON_CLOSE );
+			setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
 			setSize( 600, 400 );
 			setLocation( 250, 90 );
 			
@@ -105,9 +105,6 @@ public class MenuLogin extends JFrame {
 			
 			getContentPane().add(pIzq, BorderLayout.WEST);
 			
-			pInferior.add(bRegistro);
-			pInferior.add(bIniciosesion);
-			getContentPane().add( pInferior, BorderLayout.SOUTH );
 			
 			Container panelContenidos = new JPanel();
 			panelContenidos.setLayout(new BoxLayout(panelContenidos,BoxLayout.Y_AXIS));
@@ -126,6 +123,21 @@ public class MenuLogin extends JFrame {
 						@Override
 						public void actionPerformed(ActionEvent e) {
 							if(patUsuario.matcher(nombreUsuario.getText()).matches() && patContrasenya.matcher(contrasenya.getText()).matches()) {
+								
+								BD bd = new BD();
+								Jugador jugador = new Jugador();
+								
+								jugador.setNombreJugador(nombreUsuario.getText());
+								jugador.setContrasenya(contrasenya.getText());
+								
+								if(bd.insertarJugador(jugador)) {
+									JOptionPane.showMessageDialog(null, "Jugador registrado con exito");
+								}else {
+									JOptionPane.showMessageDialog(null, "No se ha podido registrar");
+								}
+								MenuArcade.main(null);
+								
+								/*
 								ArrayList<String> datos = new ArrayList<String>();
 								cargarFicheroUsuarios(datos, "usuarios.txt");
 								for (String string : datos) {
@@ -135,10 +147,13 @@ public class MenuLogin extends JFrame {
 										usuarioValido = false;
 									}
 								}
-								if (usuarioValido!=false) {
+								
+								if (usuarioValido=true) {
 									//Añadir un jugador a la bd
-									Jugador jugador = new Jugador(nombreUsuario.getText());
-									BD.insertarJugador(jugador);
+								//	Jugador jugador = new Jugador(nombreUsuario.getText());
+									System.out.println(nombreUsuario.getText());
+									
+									//BD.insertarJugador(jugador);
 									System.out.println("Jugador añadido");
 									try {
 										usuarios = new PrintStream(new FileOutputStream("usuarios.txt", true));
@@ -152,6 +167,7 @@ public class MenuLogin extends JFrame {
 									t.start(); 
 									dispose();
 								}
+								*/
 								
 							}else if(patUsuario.matcher(nombreUsuario.getText()).matches()!=true){
 								JOptionPane.showMessageDialog(null, "Introduzca un usuario valido");
@@ -201,13 +217,18 @@ public class MenuLogin extends JFrame {
 						}
 					});
 			
+			pInferior.add(bRegistro);
+			pInferior.add(bIniciosesion);
+			getContentPane().add( pInferior, BorderLayout.SOUTH );
+			
+			
 			this.addWindowListener(new WindowAdapter() {
 				public void windowClosed(WindowEvent ev) {
 					log.log(Level.INFO, "Fecha logout " + (new Date()));
 					System.out.println("cerrado");
 				}
 				 public void windowActivated(WindowEvent ev) {
-					 BD.initBD("Arcade.sql");
+					 BD.initBD("Arcade.db");
 					 System.out.println("BD abierta");
 				 }
 				
