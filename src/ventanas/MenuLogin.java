@@ -137,7 +137,7 @@ public class MenuLogin extends JFrame {
 								}
 								MenuArcade.main(null);
 								
-								/*
+								
 								ArrayList<String> datos = new ArrayList<String>();
 								cargarFicheroUsuarios(datos, "usuarios.txt");
 								for (String string : datos) {
@@ -167,7 +167,7 @@ public class MenuLogin extends JFrame {
 									t.start(); 
 									dispose();
 								}
-								*/
+								
 								
 							}else if(patUsuario.matcher(nombreUsuario.getText()).matches()!=true){
 								JOptionPane.showMessageDialog(null, "Introduzca un usuario valido");

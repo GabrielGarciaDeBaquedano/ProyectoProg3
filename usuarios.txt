@@ -25,3 +25,6 @@ Usuario: aitolo@gmail.com Contrasenya: Txuti011
 Usuario: pruebaMaez@gmail.com Contrasenya: 12345678910
 Usuario: asdsad@gmail.com Contrasenya: 12345678
 Usuario: migjsgins@gmail.com Contrasenya: Txuti011
+Usuario: hola@gmail.com Contrasenya: 12345678
+Usuario: mecomeelho@gmail.com Contrasenya: Txuti011
+Usuario: manuto@gmail.com Contrasenya: Txuti011

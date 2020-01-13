@@ -26,7 +26,7 @@ public class BD {
 		    con = DriverManager.getConnection("jdbc:sqlite:" + nombreBD );
 			log( Level.INFO, "Conectada base de datos " + nombreBD, null );
 			Statement st = con.createStatement();
-			st.executeUpdate("CREATE TABLE IF NOT EXISTS Jugador(idusuario int(10) AUTOINCREMENT PRIMARY KEY  NOT NULL,"
+			st.executeUpdate("CREATE TABLE IF NOT EXISTS Jugador(idusuario int(10) AUTOINCREMENT PRIMARY KEY NOT NULL,"
 					+ " nombreJugador VARCHAR(100),"
 					+ "contrasenya VARCHAR(20);");
 			st.executeUpdate("CREATE TABLE IF NOT EXISTS Juego(idjuego int(10) AUTOINCREMENT PRIMARY KEY NOT NULL, "
