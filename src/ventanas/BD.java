@@ -26,18 +26,18 @@ public class BD {
 		    con = DriverManager.getConnection("jdbc:sqlite:" + nombreBD );
 			log( Level.INFO, "Conectada base de datos " + nombreBD, null );
 			Statement st = con.createStatement();
-			st.executeUpdate("CREATE TABLE IF NOT EXISTS Jugador(idusuario int(10) AUTOINCREMENT PRIMARY KEY NOT NULL,"
+			st.executeUpdate("CREATE TABLE IF NOT EXISTS Jugador(idusuario int(10) NOT NULL,"
 					+ " nombreJugador VARCHAR(100),"
-					+ "contrasenya VARCHAR(20);");
-			st.executeUpdate("CREATE TABLE IF NOT EXISTS Juego(idjuego int(10) AUTOINCREMENT PRIMARY KEY NOT NULL, "
-					+ "nombreJuego VARCHAR(100);");
+					+ "contrasenya VARCHAR(20))");
+			st.executeUpdate("CREATE TABLE IF NOT EXISTS Juego(idjuego int(10) PRIMARY KEY NOT NULL, "
+					+ "nombreJuego VARCHAR(100));");
 			st.executeUpdate("CREATE TABLE IF NOT EXISTS Partida"
-					+ "(codPartida int(10) PRIMARY KEY AUTOINCREMENT NOT NULL, "
+					+ "(codPartida int(10) PRIMARY KEY NOT NULL,"
 					+ "idusuario int(10),"
 					+ " nombreJuego VARCHAR(100),  puntuacion VARCHAR(7), tiempoPartida DECIMAL(5, 2), fechaPartida DATE,"
 					+ "idjuego int(10),"
-					+ "FOREIGN KEY(idusuario) references Jugador(idusuario) ON DELETE CASCADE"
-					+ "FOREIGN KEY(idjuego) references Juego(idjuego) ON DELETE CASCADE;");
+					+ "FOREIGN KEY(idusuario) references Jugador(idusuario) ON DELETE CASCADE, "
+					+ "FOREIGN KEY(idjuego) references Juego(idjuego) ON DELETE CASCADE);");
 			
 		    return con;
 		} catch (ClassNotFoundException | SQLException e) {
@@ -49,7 +49,7 @@ public class BD {
 
 	public static boolean insertarJugador(Jugador jugador) {
 		con = initBD("Arcade.db");
-		String sql = "INSERT INTO Jugador values(idusuario, nombreJugador, contrasenya) VALUES(?,?,?)";
+		String sql = "INSERT INTO Jugador(idusuario, nombreJugador, contrasenya) VALUES(?,?,?)";
 			try {
 				
 				PreparedStatement pst = con.prepareStatement(sql);

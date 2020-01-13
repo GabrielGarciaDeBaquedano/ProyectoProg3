@@ -135,7 +135,7 @@ public class MenuLogin extends JFrame {
 								}else {
 									JOptionPane.showMessageDialog(null, "No se ha podido registrar");
 								}
-								MenuArcade.main(null);
+								//MenuArcade.main(null);
 								
 								
 								ArrayList<String> datos = new ArrayList<String>();
@@ -159,13 +159,13 @@ public class MenuLogin extends JFrame {
 										usuarios = new PrintStream(new FileOutputStream("usuarios.txt", true));
 									} catch (Exception e1) {}
 									usuarios.println("Usuario: "+nombreUsuario.getText()+" Contrasenya: "+contrasenya.getText());
-									Thread t = new Thread () {
+									/*Thread t = new Thread () {
 										public void run() {
 												MenuArcade.main(null);
 										}
 									};
 									t.start(); 
-									dispose();
+									dispose();*/
 								}
 								
 								
