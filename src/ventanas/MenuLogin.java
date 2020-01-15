@@ -40,14 +40,17 @@ public class MenuLogin extends JFrame {
 	
 	static Logger log;
 
-		public static void main(String[] args) {
+		public static void main(String[] args) { 
 			MenuLogin ml = new MenuLogin();
 			ml.setVisible(true);
 		}
 		
 		private static JTextField nombreUsuario;
+		
+		private static JTextField nick;
 
 		private JTextField contrasenya;
+		
 
 
 		private JLabel titulo;
@@ -73,7 +76,9 @@ public class MenuLogin extends JFrame {
 			
 			lGif = new JLabel( new ImageIcon( "src/img/giphy.gif" ) );
 			
-			nombreUsuario = new JTextField(20);
+			nombreUsuario = new JTextField(19);
+			
+			nick = new JTextField(20);
 
 			contrasenya = new JPasswordField(17);
 
@@ -98,6 +103,8 @@ public class MenuLogin extends JFrame {
 			getContentPane().add( lGif, BorderLayout.CENTER );
 			
 			pIzq.add(nombreUsuario);
+			
+			pIzq.add(nick);
 
 			pIzq.add(contrasenya);
 
@@ -110,13 +117,13 @@ public class MenuLogin extends JFrame {
 			panelContenidos.setLayout(new BoxLayout(panelContenidos,BoxLayout.Y_AXIS));
 			pIzq.add(panelContenidos);
 			posicionaLinea( panelContenidos, null, titulo );
-			posicionaLinea( panelContenidos, "Nick:", nombreUsuario );
+			posicionaLinea( panelContenidos, "Correo:", nombreUsuario );
+			posicionaLinea( panelContenidos, "Nick:", nick);
 			posicionaLinea( panelContenidos, "Password:", contrasenya );
 			
 			bRegistro.addActionListener( 
 					
 					new ActionListener() {
-						private boolean usuarioValido=true;
 						Pattern patUsuario = Pattern.compile(UsuarioValido);
 						Pattern patContrasenya = Pattern.compile(ContrasenyaValida);
 						
@@ -130,15 +137,16 @@ public class MenuLogin extends JFrame {
 								jugador.setNombreJugador(nombreUsuario.getText());
 								jugador.setContrasenya(contrasenya.getText());
 								
-								if(bd.insertarJugador(jugador)) {
+								if(BD.insertarJugador(jugador)==true) {
 									JOptionPane.showMessageDialog(null, "Jugador registrado con exito");
+									System.out.println("He llegado");
 								}else {
 									JOptionPane.showMessageDialog(null, "No se ha podido registrar");
 								}
 								//MenuArcade.main(null);
 								
 								
-								ArrayList<String> datos = new ArrayList<String>();
+								/*ArrayList<String> datos = new ArrayList<String>();
 								cargarFicheroUsuarios(datos, "usuarios.txt");
 								for (String string : datos) {
 									String[] nom = string.split(" ");
@@ -146,14 +154,14 @@ public class MenuLogin extends JFrame {
 										JOptionPane.showMessageDialog(null, "El nombre de usuario ya esta en uso");
 										usuarioValido = false;
 									}
-								}
+								}*/
 								
-								if (usuarioValido=true) {
+							/*	if (usuarioValido=true) {
 									//Añadir un jugador a la bd
 								//	Jugador jugador = new Jugador(nombreUsuario.getText());
 									System.out.println(nombreUsuario.getText());
 									
-									//BD.insertarJugador(jugador);
+									BD.insertarJugador(jugador);
 									System.out.println("Jugador añadido");
 									try {
 										usuarios = new PrintStream(new FileOutputStream("usuarios.txt", true));
@@ -166,10 +174,15 @@ public class MenuLogin extends JFrame {
 									};
 									t.start(); 
 									dispose();*/
+								
+								
 								}
+							
 								
 								
-							}else if(patUsuario.matcher(nombreUsuario.getText()).matches()!=true){
+							
+				
+						else if(patUsuario.matcher(nombreUsuario.getText()).matches()!=true){
 								JOptionPane.showMessageDialog(null, "Introduzca un usuario valido");
 							
 							}else if(patContrasenya.matcher(contrasenya.getText()).matches()!=true){
@@ -181,10 +194,22 @@ public class MenuLogin extends JFrame {
 			
 			bIniciosesion.addActionListener( 
 					new ActionListener() {
-						private boolean usuarioValido = false;
 						@Override
 						public void actionPerformed(ActionEvent e) {
-							ArrayList<String> datos = new ArrayList<String>();	
+							BD bd = new BD();
+							Jugador jugador = new Jugador();
+							if(!nombreUsuario.getText().equals("") && !contrasenya.equals("")) {
+								jugador.setNombreJugador(nombreUsuario.getText());
+								jugador.setContrasenya(contrasenya.getText());
+								
+								if(BD.obtenerJugador(jugador)) {
+									jugador = new Jugador(jugador.getIdusuario(), jugador.getNombreJugador(), jugador.getContrasenya());
+									MenuArcade.main(null);
+								}else {
+									JOptionPane.showMessageDialog(null, "Usuario no encontrado");
+								}
+							}
+							/*ArrayList<String> datos = new ArrayList<String>();	
 							cargarFicheroUsuarios(datos, "usuarios.txt");
 							for (String string : datos) {
 								String[] nom = string.split(" ");
@@ -198,10 +223,8 @@ public class MenuLogin extends JFrame {
 									t.start(); 
 									dispose();
 								}
-							}
-							if(usuarioValido==false) {
-								JOptionPane.showMessageDialog(null, "Introduzca un nombre de usuario y contraseÃ±a existentes");
-							}
+							}*/
+						
 							try {
 								log = Logger.getLogger("login-logger");
 								log.addHandler(new FileHandler("Log.txt"));
@@ -228,14 +251,14 @@ public class MenuLogin extends JFrame {
 					System.out.println("cerrado");
 				}
 				 public void windowActivated(WindowEvent ev) {
-					 BD.initBD("Arcade.db");
+					 BD.initBD("ArcadeMachine");
 					 System.out.println("BD abierta");
 				 }
 				
 			});
 		}
 			
-			public static void cargarFicheroUsuarios( ArrayList<String> l, String nombreFic ) {
+		/*	public static void cargarFicheroUsuarios( ArrayList<String> l, String nombreFic ) {
 				try {
 					Scanner fE = new Scanner( new FileInputStream( nombreFic ) );
 					while (fE.hasNext()) {
@@ -251,7 +274,7 @@ public class MenuLogin extends JFrame {
 				} catch (IOException e) {
 					System.out.println( "No ha sido posible leer el fichero." );
 				}
-			}
+			}*/
 			
 			public static String getNick() {
 				return nombreUsuario.getText();

@@ -26,7 +26,7 @@ public class BD {
 		    con = DriverManager.getConnection("jdbc:sqlite:" + nombreBD );
 			log( Level.INFO, "Conectada base de datos " + nombreBD, null );
 			Statement st = con.createStatement();
-			st.executeUpdate("CREATE TABLE IF NOT EXISTS Jugador(idusuario int(10) NOT NULL,"
+			st.executeUpdate("CREATE TABLE IF NOT EXISTS Jugador(idusuario int(10) PRIMARY KEY NOT NULL,"
 					+ " nombreJugador VARCHAR(100),"
 					+ "contrasenya VARCHAR(20))");
 			st.executeUpdate("CREATE TABLE IF NOT EXISTS Juego(idjuego int(10) PRIMARY KEY NOT NULL, "
@@ -49,7 +49,7 @@ public class BD {
 
 	public static boolean insertarJugador(Jugador jugador) {
 		con = initBD("Arcade.db");
-		String sql = "INSERT INTO Jugador(idusuario, nombreJugador, contrasenya) VALUES(?,?,?)";
+		String sql = "INSERT INTO jugador(idusuario, nombreJugador, contrasenya) VALUES(?,?,?)";
 			try {
 				
 				PreparedStatement pst = con.prepareStatement(sql);
