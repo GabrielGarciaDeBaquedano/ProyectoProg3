@@ -25,9 +25,11 @@ public class MenuArcade extends JFrame {
 	private JLabel lLogotipoAsteroids;
 	private JLabel lLogotipoPong;
 	private JLabel lLogotipoFlappyCar;
+	private JLabel lLogotipoMinesweeper;
 	private JButton bAsteroids;
 	private JButton bPong;
 	private JButton bFlappyCar;
+	private JButton bMinesweeper;
 	private JButton bEstadisticas;
 	private JButton bSalir; 
 
@@ -41,10 +43,12 @@ public class MenuArcade extends JFrame {
 		lLogotipoFlappyCar = new JLabel( new ImageIcon( "src/img/lamborghini_inicio.jpg" ) );
 		lLogotipoAsteroids = new JLabel( new ImageIcon( "src/img/asteroids-deluxe-logo.png" ) );
 		lLogotipoPong = new JLabel( new ImageIcon( "src/img/pong.png" ) );
+		lLogotipoMinesweeper = new JLabel( new ImageIcon("src/img/minsweeper.jpg"));
 		lMensaje = new JLabel();
 		bAsteroids = new JButton( "Asteroids" );
 		bPong = new JButton( "Pong" );
-		bFlappyCar = new JButton("Flappy Car"); 
+		bFlappyCar = new JButton("Flappy Car");
+		bMinesweeper = new JButton("Busca Minas");
 		bEstadisticas = new JButton("Estadisticas");
 		bSalir = new JButton("Salir");
 		JPanel pInferior = new JPanel();
@@ -62,6 +66,7 @@ public class MenuArcade extends JFrame {
 		pInferior.add( bAsteroids );
 		pInferior.add( bPong );
 		pInferior.add( bFlappyCar );
+		pInferior.add( bMinesweeper );
 		pInferior.add( bEstadisticas );
 		pInferior.add(bSalir); 
 		getContentPane().add( pInferior, BorderLayout.SOUTH );
@@ -139,6 +144,35 @@ public class MenuArcade extends JFrame {
 		});
 		
 		bFlappyCar.addActionListener( 
+				new ActionListener() { 
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						Thread t = new Thread () {
+							public void run() {
+									FlappyCar
+									.main( null );		
+							}
+						};
+						t.start(); 
+						dispose();
+					}
+			});
+		
+		bMinesweeper.addMouseListener(new MouseAdapter() {
+			@Override
+            public void mouseEntered(MouseEvent arg0) {
+				lLogotipoArcade.setVisible(false);
+				lLogotipoMinesweeper.setVisible(true);
+				getContentPane().add( lLogotipoMinesweeper, BorderLayout.CENTER );		
+            }
+			@Override
+            public void mouseExited(MouseEvent arg0) {
+				lLogotipoMinesweeper.setVisible(false);
+				lLogotipoArcade.setVisible(true);
+            }
+		});
+		
+		bMinesweeper.addActionListener( 
 				new ActionListener() { 
 					@Override
 					public void actionPerformed(ActionEvent e) {
