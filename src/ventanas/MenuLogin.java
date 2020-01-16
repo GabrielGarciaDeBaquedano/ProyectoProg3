@@ -49,7 +49,7 @@ public class MenuLogin extends JFrame {
 		
 		private static JTextField nick;
 
-		private JTextField contrasenya;
+		private static JTextField contrasenya;
 		
 
 
@@ -57,8 +57,10 @@ public class MenuLogin extends JFrame {
 		private JButton bRegistro;
 		private JButton bIniciosesion;
 		private JLabel lGif;
-		private String UsuarioValido = "[a-zA-Z_0-9]{1,12}@[a-z]{5,12}.[a-z]{2,4}";
-		private String ContrasenyaValida = "[a-zA-Z_0-9]{8,}";
+		private static String UsuarioValido = "[a-zA-Z_0-9]{1,12}@[a-z]{5,12}.[a-z]{2,4}";
+		private static String ContrasenyaValida = "[a-zA-Z_0-9]{8,}";
+		Pattern patUsuario = Pattern.compile(UsuarioValido);
+		Pattern patContrasenya = Pattern.compile(ContrasenyaValida);
 		
 		private void posicionaLinea( Container p, String etiqueta, Component campo ) {
 			JPanel tempPanel = new JPanel();
@@ -66,6 +68,27 @@ public class MenuLogin extends JFrame {
 			tempPanel.add( new JLabel( etiqueta ) );
 			tempPanel.add( campo );
 			p.add( tempPanel );
+		}
+		public static boolean comprobarCorreo(String Correo) {
+			Pattern patUsuario = Pattern.compile(UsuarioValido);
+			if(patUsuario.matcher(nombreUsuario.getText()).matches()) {
+				System.out.println(Correo + " cumple el patrón");
+				return patUsuario.matcher(Correo).matches();
+			} else {
+				System.out.println(Correo + " no cumple el patrón");
+				return false;
+			}
+		}
+		
+		public static boolean comprobarContrasenya(String Contrasenya) {
+			Pattern patContrasenya = Pattern.compile(ContrasenyaValida);
+			if(patContrasenya.matcher(contrasenya.getText()).matches()) {
+				System.out.println(Contrasenya + " cumple el patrón");
+				return patContrasenya.matcher(Contrasenya).matches();
+			} else {
+				System.out.println(Contrasenya + " no cumple el patrón");
+				return false;
+			}
 		}
 		
 		public MenuLogin() {
@@ -124,12 +147,10 @@ public class MenuLogin extends JFrame {
 			bRegistro.addActionListener( 
 					
 					new ActionListener() {
-						Pattern patUsuario = Pattern.compile(UsuarioValido);
-						Pattern patContrasenya = Pattern.compile(ContrasenyaValida);
 						
 						@Override
 						public void actionPerformed(ActionEvent e) {
-							if(patUsuario.matcher(nombreUsuario.getText()).matches() && patContrasenya.matcher(contrasenya.getText()).matches()) {
+							if(comprobarCorreo(nombreUsuario.getText()) && comprobarContrasenya(contrasenya.getText())) {
 								
 								BD bd = new BD();
 								Jugador jugador = new Jugador();
