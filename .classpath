@@ -6,5 +6,8 @@
 	<classpathentry kind="lib" path="C:/Users/Jon/Downloads/sqlite-jdbc-3.27.2.1.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Jon/Downloads/jar_files/jfreechart-1.0.19.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Jon/Downloads/jar_files/jcommon-1.0.23.jar"/>
+	<classpathentry kind="lib" path="C:/Users/ggbaq/Downloads/jfreechart-1.0.19-javadoc.jar"/>
+	<classpathentry kind="lib" path="C:/Users/ggbaq/Downloads/sqlite-jdbc-3.27.2.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/ggbaq/Documents/EJES/jcommon-1.0.23/jcommon-1.0.23/jcommon-1.0.23.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

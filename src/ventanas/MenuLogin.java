@@ -72,10 +72,10 @@ public class MenuLogin extends JFrame {
 		public static boolean comprobarCorreo(String Correo) {
 			Pattern patUsuario = Pattern.compile(UsuarioValido);
 			if(patUsuario.matcher(nombreUsuario.getText()).matches()) {
-				System.out.println(Correo + " cumple el patrón");
+				System.out.println(Correo + " cumple el patrï¿½n");
 				return patUsuario.matcher(Correo).matches();
 			} else {
-				System.out.println(Correo + " no cumple el patrón");
+				System.out.println(Correo + " no cumple el patrï¿½n");
 				return false;
 			}
 		}
@@ -83,10 +83,10 @@ public class MenuLogin extends JFrame {
 		public static boolean comprobarContrasenya(String Contrasenya) {
 			Pattern patContrasenya = Pattern.compile(ContrasenyaValida);
 			if(patContrasenya.matcher(contrasenya.getText()).matches()) {
-				System.out.println(Contrasenya + " cumple el patrón");
+				System.out.println(Contrasenya + " cumple el patrï¿½n");
 				return patContrasenya.matcher(Contrasenya).matches();
 			} else {
-				System.out.println(Contrasenya + " no cumple el patrón");
+				System.out.println(Contrasenya + " no cumple el patrï¿½n");
 				return false;
 			}
 		}
@@ -178,12 +178,12 @@ public class MenuLogin extends JFrame {
 								}*/
 								
 							/*	if (usuarioValido=true) {
-									//Añadir un jugador a la bd
+									//Aï¿½adir un jugador a la bd
 								//	Jugador jugador = new Jugador(nombreUsuario.getText());
 									System.out.println(nombreUsuario.getText());
 									
 									BD.insertarJugador(jugador);
-									System.out.println("Jugador añadido");
+									System.out.println("Jugador aï¿½adido");
 									try {
 										usuarios = new PrintStream(new FileOutputStream("usuarios.txt", true));
 									} catch (Exception e1) {}
@@ -248,7 +248,7 @@ public class MenuLogin extends JFrame {
 						
 							try {
 								log = Logger.getLogger("login-logger");
-								log.addHandler(new FileHandler("Log.txt"));
+								log.addHandler(new FileHandler("Log.xml"));
 							} catch (SecurityException ex) {
 								// TODO Auto-generated catch block
 								ex.printStackTrace();

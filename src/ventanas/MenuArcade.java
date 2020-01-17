@@ -178,7 +178,7 @@ public class MenuArcade extends JFrame {
 					public void actionPerformed(ActionEvent e) {
 						Thread t = new Thread () {
 							public void run() {
-									FlappyCar
+									MainBuscaminas
 									.main( null );		
 							}
 						};
