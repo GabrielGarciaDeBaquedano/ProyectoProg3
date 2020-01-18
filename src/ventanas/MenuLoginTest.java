@@ -17,8 +17,17 @@ public class MenuLoginTest {
 	}
 
 	@Test
-	public void test() {
-		fail("Not yet implemented");
+	public void testCorreo() {
+		assertEquals(MenuLogin.comprobarCorreo("MiguelJuan@gmail.com"), true);
+		assertTrue(MenuLogin.comprobarCorreo("aitortilla@gmail.com"));
+		assertFalse(MenuLogin.comprobarCorreo("rumpelstiltskin@gmail.com"));
+		
+	}
+	
+	public void testContrasenya() {
+		assertEquals(MenuLogin.comprobarContrasenya("Txuti011"), true);
+		assertTrue(MenuLogin.comprobarContrasenya("ElPenas_09"));
+		assertFalse(MenuLogin.comprobarContrasenya("Ermikelats"));
 	}
 
 }
