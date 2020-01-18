@@ -138,11 +138,11 @@ public class Minesweeper extends JFrame
 	public void select(int x, int y)
 	{
 		if (celdas[x][y].isMarcada()) return;
-		celdas[x][y].revela();
+		//celdas[x][y].revela();
 		resetMarks();
 		refresh();
-		if (celdas[x][y].getNumber()==0) busquedaRecursiva(celdas, x, y);
- 
+		if (celdas[x][y].getNumber()==0) busquedaRecursivaCeros(x, y);
+		if (celdas[x][y].getNumber()!=0) celdas[x][y].revela();
 		if (celdas[x][y].isMina())
 		{
 			loose();
@@ -153,54 +153,24 @@ public class Minesweeper extends JFrame
 		}
 	}
  
-	private void busquedaRecursiva(Celda[][] celdas, int x, int y) {
-		if (celdas[x][y].getNumber()!=0)celdas[x][y].revela();
-		else {
-			celdas[x][y].revela();
-			if(x==0 && y==0) {
-				busquedaRecursiva(celdas,x+1,y);
-				busquedaRecursiva(celdas,x+1,y+1);
-				busquedaRecursiva(celdas,x,y+1);
-			}else if(x==9 && y==0) {
-				busquedaRecursiva(celdas,x-1,y);
-				busquedaRecursiva(celdas,x-1,y+1);
-				busquedaRecursiva(celdas,x,y+1);
-			}else if(x==9 && y==9) {
-				busquedaRecursiva(celdas,x,y-1);
-				busquedaRecursiva(celdas,x-1,y);
-				busquedaRecursiva(celdas,x-1,y-1);
-			}else if(x==0 && y==9) {
-				busquedaRecursiva(celdas,x+1,y);
-				busquedaRecursiva(celdas,x+1,y-1);
-				busquedaRecursiva(celdas,x,y-1);
-			}else if(x==0) {
-				busquedaRecursiva(celdas,x,y-1);
-				busquedaRecursiva(celdas,x,y+1);
-				busquedaRecursiva(celdas,x+1,y-1);
-				busquedaRecursiva(celdas,x+1,y+1);
-				busquedaRecursiva(celdas,x+1,y);
-			}else if(x==9) {
-				busquedaRecursiva(celdas,x,y-1);
-				busquedaRecursiva(celdas,x,y+1);
-				busquedaRecursiva(celdas,x-1,y);
-				busquedaRecursiva(celdas,x-1,y+1);
-				busquedaRecursiva(celdas,x-1,y-1);
-			}else if(y==0) {
-				busquedaRecursiva(celdas,x,y+1);
-				busquedaRecursiva(celdas,x+1,y);
-				busquedaRecursiva(celdas,x-1,y);
-				busquedaRecursiva(celdas,x+1,y+1);
-				busquedaRecursiva(celdas,x-1,y+1);
-			}else if(y==9) {
-				busquedaRecursiva(celdas,x,y-1);
-				busquedaRecursiva(celdas,x+1,y);
-				busquedaRecursiva(celdas,x-1,y);
-				busquedaRecursiva(celdas,x-1,y-1);
-				busquedaRecursiva(celdas,x+1,y-1);
-			}
-		}
-	}
+	private void busquedaRecursivaCeros(int x, int y) {
+        if (x < 0 || x > 9 || y < 0 || y > 9) return; // check for bounds
 
+           if ( celdas[x][y].getNumber() == 0 && celdas[x][y].isTapada()) {
+               celdas[x][y].revela();
+               busquedaRecursivaCeros( x+1, y );
+               busquedaRecursivaCeros( x+1, y+1);
+               busquedaRecursivaCeros( x-1, y );
+               busquedaRecursivaCeros( x-1, y-1);
+               busquedaRecursivaCeros( x, y-1 );
+               busquedaRecursivaCeros( x+1, y-1 );
+               busquedaRecursivaCeros( x, y+1 );
+               busquedaRecursivaCeros( x-1, y+1 );
+           } else if(celdas[x][y].getNumber() != 0 && celdas[x][y].isTapada()){
+               celdas[x][y].revela();
+           }
+        }
+	
 	private void loose()
 	{
 		acabado = true;
