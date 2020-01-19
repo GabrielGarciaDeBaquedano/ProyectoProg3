@@ -24,7 +24,7 @@ public class VentanaEstadisticas extends JFrame {
 	private static JButton bMinesweeper;
 	private static JButton bVolver;
 	
-	public  VentanaEstadisticas() {
+	public  VentanaEstadisticas() { 
 
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setSize(800, 400);
