@@ -39,6 +39,14 @@ public class BD {
 					+ "FOREIGN KEY(idusuario) references Jugador(idusuario) ON DELETE CASCADE, "
 					+ "FOREIGN KEY(idjuego) references Juego(idjuego) ON DELETE CASCADE);");
 			
+			try {
+				st.executeUpdate( "insert into Juego (id, nombreJuego) values (1,'Asteroids');" );
+				st.executeUpdate( "insert into Juego (id, nombreJuego) values (2,'Pong');" );
+				st.executeUpdate( "insert into Juego (id, nombreJuego) values (3,'Flappy Car');" );
+				st.executeUpdate( "insert into Juego (id, nombreJuego) values (4,'Busca Minas');" );
+				
+			} catch(Exception e) {}
+			
 		    return con;
 		} catch (ClassNotFoundException | SQLException e) {
 			log( Level.SEVERE, "Error en conexi�n de base de datos " + nombreBD, e );
