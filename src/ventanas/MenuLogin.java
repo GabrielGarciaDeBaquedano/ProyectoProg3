@@ -152,7 +152,7 @@ public class MenuLogin extends JFrame {
 						public void actionPerformed(ActionEvent e) {
 							if(comprobarCorreo(nombreUsuario.getText()) && comprobarContrasenya(contrasenya.getText())) {
 								
-								BD bd = new BD();
+								//BD bd = new BD();
 								Jugador jugador = new Jugador();
 								
 								jugador.setNombreJugador(nombreUsuario.getText());
@@ -160,7 +160,6 @@ public class MenuLogin extends JFrame {
 								
 								if(BD.insertarJugador(jugador)==true) {
 									JOptionPane.showMessageDialog(null, "Jugador registrado con exito");
-									System.out.println("He llegado");
 								}else {
 									JOptionPane.showMessageDialog(null, "No se ha podido registrar");
 								}
@@ -217,14 +216,14 @@ public class MenuLogin extends JFrame {
 					new ActionListener() {
 						@Override
 						public void actionPerformed(ActionEvent e) {
-							BD bd = new BD();
+							//BD bd = new BD();
 							Jugador jugador = new Jugador();
 							if(!nombreUsuario.getText().equals("") && !contrasenya.equals("")) {
 								jugador.setNombreJugador(nombreUsuario.getText());
 								jugador.setContrasenya(contrasenya.getText());
 								
 								if(BD.obtenerJugador(jugador)) {
-									jugador = new Jugador(jugador.getIdusuario(), jugador.getNombreJugador(), jugador.getContrasenya());
+									//jugador = new Jugador(jugador.getIdusuario(), jugador.getNombreJugador(), jugador.getContrasenya());
 									MenuArcade.main(null);
 								}else {
 									JOptionPane.showMessageDialog(null, "Usuario no encontrado");
