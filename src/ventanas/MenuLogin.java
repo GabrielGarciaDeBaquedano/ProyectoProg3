@@ -72,10 +72,10 @@ public class MenuLogin extends JFrame {
 		public static boolean comprobarCorreo(String Correo) {
 			Pattern patUsuario = Pattern.compile(UsuarioValido);
 			if(patUsuario.matcher(nombreUsuario.getText()).matches()) {
-				System.out.println(Correo + " cumple el patr�n");
+				System.out.println(Correo + " cumple el patron");
 				return patUsuario.matcher(Correo).matches();
 			} else {
-				System.out.println(Correo + " no cumple el patr�n");
+				System.out.println(Correo + " no cumple el patron");
 				return false;
 			}
 		}
@@ -86,7 +86,7 @@ public class MenuLogin extends JFrame {
 				System.out.println(Contrasenya + " cumple el patr�n");
 				return patContrasenya.matcher(Contrasenya).matches();
 			} else {
-				System.out.println(Contrasenya + " no cumple el patr�n");
+				System.out.println(Contrasenya + " no cumple el patron");
 				return false;
 			}
 		}
@@ -271,7 +271,7 @@ public class MenuLogin extends JFrame {
 					log.log(Level.INFO, "Fecha logout " + (new Date()));
 					System.out.println("cerrado");
 				}
-				 public void windowActivated(WindowEvent ev) {
+				 public void windowOpened(WindowEvent ev) {
 					 BD.initBD("ArcadeMachine");
 					 System.out.println("BD abierta");
 				 }
