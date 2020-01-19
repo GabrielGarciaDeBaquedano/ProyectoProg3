@@ -11,7 +11,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
 
-public class TablaPrueba extends JFrame{
+public class TablaAsteroids extends JFrame{
 
 	/**
 	 * 
@@ -23,7 +23,7 @@ public class TablaPrueba extends JFrame{
 
 
 	public static void main(String[] args) {
-		TablaPrueba ver = new TablaPrueba(); 
+		TablaAsteroids ver = new TablaAsteroids(); 
 		ver.mostrar();
 		ver.setVisible(true);
 	}
@@ -39,7 +39,7 @@ public class TablaPrueba extends JFrame{
 
 
 
-	public TablaPrueba() {
+	public TablaAsteroids() {
 		setSize(600,400);
 		setLocation(300, 200);
 
@@ -93,7 +93,8 @@ public class TablaPrueba extends JFrame{
 		String SQL = ""; 
 		try {
 			Statement stat = conn.createStatement();
-			SQL = "select codPartida,nombreJugador,nombreJuego,puntuacion,tiempoPartida,fechaPartida from partida "; 
+			SQL = "select codPartida,nombreJugador,nombreJuego,puntuacion,tiempoPartida,fechaPartida from partida"
+					+ "where nombreJuego='Asteroids' "; 
 
 
 

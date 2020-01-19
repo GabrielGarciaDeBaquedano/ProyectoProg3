@@ -21,6 +21,7 @@ public class VentanaEstadisticas extends JFrame {
 	private  static JButton bPong;
 	private static JButton bAsteroids;
 	private static JButton bFlappyCar;
+	private static JButton bMinesweeper;
 	private static JButton bVolver;
 	
 	public  VentanaEstadisticas() {
@@ -34,12 +35,14 @@ public class VentanaEstadisticas extends JFrame {
 		bPong = new JButton("Pong" );
 		bAsteroids = new JButton("Asteroids");
 		bFlappyCar = new JButton("Flappy Car");
+		bMinesweeper = new JButton("Busca Minas");
 		bVolver = new JButton("Volver ");
 		
 		escogerJuego.add(estadisticasJuegos, BorderLayout.NORTH);
 		escogerJuego.add(bAsteroids);
 		escogerJuego.add(bPong );
 		escogerJuego.add(bFlappyCar);
+		escogerJuego.add(bMinesweeper);
 		escogerJuego.add(bVolver);
 		getContentPane().add(escogerJuego, BorderLayout.WEST);
 		
@@ -64,7 +67,52 @@ public class VentanaEstadisticas extends JFrame {
 					public void actionPerformed(ActionEvent e) {
 						Thread t = new Thread () {
 							public void run() {
-									EstatsAsteroids.main( null );		
+									//EstatsAsteroids.main( null );
+								TablaAsteroids.main(null);
+							}
+						};
+						t.start(); 
+						dispose();
+					}
+			});
+
+		bPong.addActionListener( 
+				new ActionListener() { 
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						Thread t = new Thread () {
+							public void run() {
+								TablaPong.main(null);
+							}
+						};
+						t.start(); 
+						dispose();
+					}
+			});
+		
+		bFlappyCar.addActionListener( 
+				new ActionListener() { 
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						Thread t = new Thread () {
+							public void run() {
+									//EstatsAsteroids.main( null );
+								TablaFlappy.main(null);
+							}
+						};
+						t.start(); 
+						dispose();
+					}
+			});
+		
+		bMinesweeper.addActionListener( 
+				new ActionListener() { 
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						Thread t = new Thread () {
+							public void run() {
+									//EstatsAsteroids.main( null );
+								TablaMinas.main(null);
 							}
 						};
 						t.start(); 
