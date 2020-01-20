@@ -27,7 +27,7 @@ public class BD {
 			log( Level.INFO, "Conectada base de datos " + nombreBD, null );
 			Statement st = con.createStatement();
 			st.executeUpdate("CREATE TABLE IF NOT EXISTS Jugador(idusuario INTEGER PRIMARY KEY AUTOINCREMENT,"
-					+ " nombreJugador VARCHAR(100),"
+					+ " nombreJugador VARCHAR(100) UNIQUE,"
 					+ " contrasenya VARCHAR(20))");
 			st.executeUpdate("CREATE TABLE IF NOT EXISTS Juego(idjuego int(10) PRIMARY KEY NOT NULL, "
 					+ " nombreJuego VARCHAR(100));");
