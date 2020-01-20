@@ -172,7 +172,17 @@ public class JuegoAsteroids {
 							// Puntua cada asteroide que destrozamos
 					Audio.lanzaAudioEnHilo("src/wav/derrota.wav");
 							System.out.println("choque de nave y ast " + nave +" "+ ast);
+							//System.out.println("Estadisticas:\n"+"Disparos realizados: "+numDisp+"\n"+"Disparos impactados: "+numImp+"\n"+"Porcentaje disparos impactados: "+(numImp/numDisp)*100+"% \n"+"Tiempo de juego: "+tiempoJuego+"s");
 							tiempoFin = System.currentTimeMillis();
+							long tiempoJuego = (long) ((tiempoFin-tiempoInicio)/1000.00);
+							Partida partida = new Partida();
+							partida.setPuntuacion(getPuntuacion());
+							partida.setTiempoPartida(tiempoJuego);
+							partida.setFechaPartida(System.currentTimeMillis());
+							partida.setIdJuego(1);
+							partida.setIdJugador(MenuLogin.getIdUsuarioEnUso());
+							BD.insertarPartida(partida);
+							System.out.println("Partida insertada");
 							vent.espera(2000);
 							Thread t = new Thread () {
 								public void run() {
@@ -182,13 +192,9 @@ public class JuegoAsteroids {
 							};
 							t.start(); 
 							vent.acaba();
-							double tiempoJuego = (tiempoFin-tiempoInicio)/1000.00;
-							System.out.println("Estadisticas:\n"+"Disparos realizados: "+numDisp+"\n"+"Disparos impactados: "+numImp+"\n"+"Porcentaje disparos impactados: "+(numImp/numDisp)*100+"% \n"+"Tiempo de juego: "+tiempoJuego+"s");
 							try {
-								estats = new PrintStream(new FileOutputStream("estadisticasAsteroids.txt", true));
 							} catch (Exception e1) {}
 							
-							estats.println("ID partida: "+(new Date())+" Nick jugador: "+MenuLogin.getNick()+" Disparos realizados: "+numDisp+" Disparos impactados: "+numImp+" Porcentaje disparos impactados: "+(numImp/numDisp)*100+"% Tiempo de juego: "+tiempoJuego+"s");
 							}
 						}
 					}
