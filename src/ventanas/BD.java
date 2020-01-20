@@ -2,6 +2,7 @@ package ventanas;
 
 import java.sql.Connection;
 
+
 import ventanas.Jugador;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -102,20 +103,27 @@ public class BD {
 	
 	
 	
-	public static boolean insertarPartida( Partida partida) {
+	
+	public static boolean insertarPartida(Partida partida) {
 		try {
-			Statement stmt = con.createStatement();
-			String sentSQL = "insert into Partida(codigo, nombreJugador, nombreJuego, puntuacion, tiempoJuego, fecha) values(,"
-			+ partida.getCodPartida()
-			+ partida.getIdJugador()
-			+ partida.getIdJuego()
-			+ partida.getPuntuacion()
-			+ partida.getTiempoPartida() 
-			+ partida.getFechaPartida() + " );";
-			stmt.executeUpdate(sentSQL);
-			return true;
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			String sentSQL = "insert into Partida(idusuario, puntuacion, tiempoPartida, fechaPartida, idjuego) values(?,?,?,?,?)";
+			
+	try {
+				
+				PreparedStatement pst = con.prepareStatement(sentSQL);
+				pst.setInt(1, partida.getIdJugador());
+				pst.setInt(2, partida.getPuntuacion());
+				pst.setDouble(3, partida.getTiempoPartida());
+				pst.setLong(4, partida.getFechaPartida());
+				pst.setInt(5, partida.getIdJuego());
+				pst.executeUpdate();
+				return true;
+			}catch( SQLException e ) {
+				e.printStackTrace();
+				return false;
+			}
+	}
+		catch(Exception e) {
 			e.printStackTrace();
 			return false;
 		}

@@ -52,7 +52,7 @@ public class MenuLogin extends JFrame {
 		private static JTextField contrasenya;
 		
 
-
+		protected static int idUsuarioEnUso;
 		private JLabel titulo;
 		private JButton bRegistro;
 		private JButton bIniciosesion;
@@ -73,7 +73,7 @@ public class MenuLogin extends JFrame {
 			Pattern patUsuario = Pattern.compile(UsuarioValido);
 			if(patUsuario.matcher(nombreUsuario.getText()).matches()) {
 				System.out.println(Correo + " cumple el patron");
-				return patUsuario.matcher(Correo).matches();
+				return true;
 			} else {
 				System.out.println(Correo + " no cumple el patron");
 				return false;
@@ -224,6 +224,7 @@ public class MenuLogin extends JFrame {
 								
 								if(BD.obtenerJugador(jugador)) {
 									//jugador = new Jugador(jugador.getIdusuario(), jugador.getNombreJugador(), jugador.getContrasenya());
+									idUsuarioEnUso = jugador.getIdusuario();
 									MenuArcade.main(null);
 								}else {
 									JOptionPane.showMessageDialog(null, "Usuario no encontrado");
@@ -298,6 +299,10 @@ public class MenuLogin extends JFrame {
 			
 			public static String getNick() {
 				return nombreUsuario.getText();
+			}
+			
+			public static int getIdUsuarioEnUso() {
+				return idUsuarioEnUso;
 			}
 		
 }

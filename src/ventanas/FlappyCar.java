@@ -198,8 +198,14 @@ public class FlappyCar implements Runnable {
 						}
 						
 						if (po.estoyMuerto()==true){ 
-							//Partida partida = new Partida(, "FlappyCar", columnasPasadas, System.currentTimeMillis() - comienzo, System.currentTimeMillis());
-							//BD.insertarPartida(partida);
+							Partida partida = new Partida();
+							partida.setPuntuacion(columnasPasadas);
+							partida.setTiempoPartida(System.currentTimeMillis()- comienzo);
+							partida.setFechaPartida(System.currentTimeMillis());
+							partida.setIdJuego(3);
+							partida.setIdJugador(MenuLogin.getIdUsuarioEnUso());
+							BD.insertarPartida(partida);
+							System.out.println("Partida insertada");
 							//String nombreUsuario = JOptionPane.showInputDialog("Introduce tu nombre: ");
 							//Record nuevo = new Record(nombreUsuario, columnasPasadas);
 							ArrayList<Record> aRecords = FlappyRecords.volcarFicheroAArrayList(Constantes.NF_RECORDS);

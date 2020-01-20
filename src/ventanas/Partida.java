@@ -18,6 +18,10 @@ public class Partida {
 		this.tiempoPartida = tiempoPartida;
 		this.fechaPartida = fechaPartida;
 	}
+	
+	public Partida() {
+		
+	}
 
 	public int getIdJugador() {
 		return idJugador;
