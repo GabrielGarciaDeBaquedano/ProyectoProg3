@@ -225,6 +225,7 @@ public class MenuLogin extends JFrame {
 								if(BD.obtenerJugador(jugador)) {
 									//jugador = new Jugador(jugador.getIdusuario(), jugador.getNombreJugador(), jugador.getContrasenya());
 									idUsuarioEnUso = jugador.getIdusuario();
+									dispose();
 									MenuArcade.main(null);
 								}else {
 									JOptionPane.showMessageDialog(null, "Usuario no encontrado");
