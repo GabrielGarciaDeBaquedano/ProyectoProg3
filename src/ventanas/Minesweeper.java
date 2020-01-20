@@ -116,16 +116,6 @@ public class Minesweeper extends JFrame
 		{
 			for (int j = 0; j < altura; j++)
 			{
-//				if (i > 0 &&	j > 0 && celdas[i - 1][j - 1].getNumber() == 0) celdas[i][j].revela();
-//				if (j > 0 && celdas[i][j - 1].getNumber() == 0) celdas[i][j].revela();
-//				if (i < anchura - 1 && j > 0 && celdas[i + 1][j - 1].getNumber() == 0) celdas[i][j].revela();
-// 
-//				if (i > 0 && celdas[i - 1][j].getNumber() == 0) celdas[i][j].revela();
-//				if (i < anchura - 1 && celdas[i + 1]	[j]		.getNumber() == 0) celdas[i][j].revela();
-// 
-//				if (i > 0 && j < altura - 1 && celdas[i - 1][j + 1].getNumber() == 0) celdas[i][j].revela();
-//				if (j < altura - 1 && celdas[i][j + 1].getNumber() == 0) celdas[i][j].revela();
-//				if (i < anchura - 1 && j < altura - 1 && celdas[i + 1][j + 1]	.getNumber() == 0) celdas[i][j].revela();
 			}
 		}
 	}
@@ -200,7 +190,7 @@ public class Minesweeper extends JFrame
 		}
  
 		refresh();
-		JOptionPane.showMessageDialog(null, "Congratulations! You won!");
+		JOptionPane.showMessageDialog(null, "Felicidades! Has ganado!");
 		reset();
 	}
  
