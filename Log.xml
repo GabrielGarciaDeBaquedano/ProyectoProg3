@@ -2,13 +2,14 @@
 <!DOCTYPE log SYSTEM "logger.dtd">
 <log>
 <record>
-  <date>2020-01-20T13:18:27</date>
-  <millis>1579522707076</millis>
+  <date>2020-01-20T13:42:22</date>
+  <millis>1579524142564</millis>
   <sequence>1</sequence>
   <logger>login-logger</logger>
   <level>INFO</level>
   <class>ventanas.MenuLogin$2</class>
   <method>actionPerformed</method>
   <thread>15</thread>
-  <message>Fecha de login Mon Jan 20 13:18:27 CET 2020</message>
+  <message>Fecha de login Mon Jan 20 13:42:22 CET 2020</message>
 </record>
+</log>

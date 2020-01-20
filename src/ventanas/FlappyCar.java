@@ -198,7 +198,7 @@ public class FlappyCar implements Runnable {
 						}
 						
 						if (po.estoyMuerto()==true){ 
-							//Partida partida = new Partida(1 , MenuLogin.get(), "FlappyCar", columnasPasadas, System.currentTimeMillis() - comienzo, System.currentTimeMillis());
+							//Partida partida = new Partida(, "FlappyCar", columnasPasadas, System.currentTimeMillis() - comienzo, System.currentTimeMillis());
 							//BD.insertarPartida(partida);
 							//String nombreUsuario = JOptionPane.showInputDialog("Introduce tu nombre: ");
 							//Record nuevo = new Record(nombreUsuario, columnasPasadas);
