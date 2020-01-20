@@ -46,7 +46,7 @@ public class BD {
 				st.executeUpdate( "insert into Juego (idjuego, nombreJuego) values (3,'Flappy Car');" );
 				st.executeUpdate( "insert into Juego (idjuego, nombreJuego) values (4,'Busca Minas');" );
 				
-			} catch(Exception e) {e.printStackTrace();}
+			} catch(Exception e) {System.out.println("Las tablas ya estaban creadas");}
 			
 		    return con;
 		} catch (ClassNotFoundException | SQLException e) {
@@ -68,7 +68,7 @@ public class BD {
 				pst.executeUpdate();
 				return true;
 			}catch( SQLException e ) {
-				e.printStackTrace();
+				System.out.println("El jugador ya estaba registrado");;
 				return false;
 			}		
 		
