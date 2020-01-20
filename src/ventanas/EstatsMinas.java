@@ -15,7 +15,7 @@ import org.jfree.chart.*;
 import org.jfree.data.general.*;;
 
 
-public class EstatsAsteroids {
+public class EstatsMinas {
 	
 	private static ArrayList<Puntuacion> l = new ArrayList<Puntuacion>();
 
@@ -23,12 +23,21 @@ public class EstatsAsteroids {
 		cargarEstats(MenuLogin.getJugadorEnUso());
 		
 		DefaultPieDataset data = new DefaultPieDataset();
-		int c = 0;
+		int ganadas = 0;
+		long tiempog = 0;
+		int perdidas = 0;
+		long tiempop = 0;
 		for (Puntuacion p : l) {
-			c++;
-			data.setValue("Partida "+c+" puntos: "+p.getPuntos()+" tiempo: "+p.getTiempo(), p.getPuntos());
+			if(p.getPuntos()==0) {
+				perdidas++;
+				tiempop += p.getTiempo();
+			}else {
+				ganadas++;
+				tiempog += p.getTiempo();
+			}
 		}
-		
+		data.setValue("Partidas ganadas "+ganadas+" tiempo medio: "+(tiempog/ganadas)/1000+"s", ganadas);
+		data.setValue("Partidas ganadas "+perdidas+" tiempo medio: "+(tiempop/perdidas)/1000+"s", perdidas);
 		JFreeChart chart = ChartFactory.createPieChart(
 		         "", 
 		         data, 
@@ -49,7 +58,7 @@ public class EstatsAsteroids {
 		try {
 			Statement stat = conn.createStatement();
 			SQL = "select nombreJugador, puntuacion, tiempoPartida from Jugador J, Partida P where J.idusuario = P.idusuario and"
-					+ " idjuego = 1 and J.idusuario = "+jugador.getIdusuario();
+					+ " idjuego = 4 and J.idusuario = "+jugador.getIdusuario();
 			ResultSet rs = stat.executeQuery( SQL );
 			
 			while (rs.next()) {

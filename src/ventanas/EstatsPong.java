@@ -15,7 +15,7 @@ import org.jfree.chart.*;
 import org.jfree.data.general.*;;
 
 
-public class EstatsAsteroids {
+public class EstatsPong {
 	
 	private static ArrayList<Puntuacion> l = new ArrayList<Puntuacion>();
 
@@ -30,14 +30,14 @@ public class EstatsAsteroids {
 		}
 		
 		JFreeChart chart = ChartFactory.createPieChart(
-		         "", 
+		         "Grafico Pong", 
 		         data, 
 		         true, 
 		         true, 
 		         false);
 		 
 		        // Mostrar Grafico
-		        ChartFrame frame = new ChartFrame("Grafico", chart);
+		        ChartFrame frame = new ChartFrame("Grafico Pong", chart);
 		        frame.pack();
 		        frame.setVisible(true);
 	
@@ -49,7 +49,7 @@ public class EstatsAsteroids {
 		try {
 			Statement stat = conn.createStatement();
 			SQL = "select nombreJugador, puntuacion, tiempoPartida from Jugador J, Partida P where J.idusuario = P.idusuario and"
-					+ " idjuego = 1 and J.idusuario = "+jugador.getIdusuario();
+					+ " idjuego = 2 and J.idusuario = "+jugador.getIdusuario();
 			ResultSet rs = stat.executeQuery( SQL );
 			
 			while (rs.next()) {

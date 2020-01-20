@@ -49,6 +49,7 @@ public class MenuLogin extends JFrame {
 
 		private static JTextField contrasenya;
 		
+		private static Jugador jugadorEnUso;
 
 		protected static int idUsuarioEnUso;
 		private JLabel titulo;
@@ -219,6 +220,7 @@ public class MenuLogin extends JFrame {
 									//jugador = new Jugador(jugador.getIdusuario(), jugador.getNombreJugador(), jugador.getContrasenya());
 									idUsuarioEnUso = jugador.getIdusuario();
 									dispose();
+									jugadorEnUso = jugador;
 									MenuArcade.main(null);
 								}else {
 									JOptionPane.showMessageDialog(null, "Usuario no encontrado");
@@ -299,4 +301,8 @@ public class MenuLogin extends JFrame {
 				return idUsuarioEnUso;
 			}
 		
+			public static Jugador getJugadorEnUso() {
+				return jugadorEnUso;
+			}
+			
 }

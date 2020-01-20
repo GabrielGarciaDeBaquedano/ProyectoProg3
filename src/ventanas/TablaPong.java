@@ -21,7 +21,7 @@ import javax.swing.table.JTableHeader;
 public class TablaPong extends JFrame{
 	
 	private static final long serialVersionUID = 1L;
-
+	private static JButton bGraficos;
 
 
 
@@ -53,8 +53,10 @@ public class TablaPong extends JFrame{
 
 		pBotonera = new JPanel(); 
 
+		bGraficos = new JButton("Graficos");
 		bVolver = new JButton("volver"); 
 
+		pBotonera.add(bGraficos);
 		pBotonera.add(bVolver);  
 
 		pPrincipal = new JPanel(); 
@@ -74,11 +76,15 @@ public class TablaPong extends JFrame{
 
 
 		bVolver.addActionListener((ActionEvent e ) -> {volver(); });
-
+		bGraficos.addActionListener((ActionEvent e ) -> {graficos(); });
 
 	}
 
 
+	private void graficos() {
+		EstatsPong.main(null); 
+	}
+	
 	public void volver() {
 
 		setVisible(false);

@@ -24,7 +24,7 @@ import javax.swing.table.JTableHeader;
 public class TablaAsteroids extends JFrame{
 	
 	private static final long serialVersionUID = 1L;
-
+	private static JButton bGraficos;
 
 
 
@@ -56,8 +56,10 @@ public class TablaAsteroids extends JFrame{
 
 		pBotonera = new JPanel(); 
 
+		bGraficos = new JButton("Graficos");
 		bVolver = new JButton("volver"); 
 
+		pBotonera.add(bGraficos);
 		pBotonera.add(bVolver);  
 
 		pPrincipal = new JPanel(); 
@@ -77,8 +79,14 @@ public class TablaAsteroids extends JFrame{
 
 
 		bVolver.addActionListener((ActionEvent e ) -> {volver(); });
+		bGraficos.addActionListener((ActionEvent e ) -> {graficos(); });
 
 
+	}
+
+
+	private void graficos() {
+		EstatsAsteroids.main(null); 
 	}
 
 
