@@ -18,7 +18,7 @@ import java.util.logging.Logger;
 public class BD {
 	
 	protected static Connection con;	
-	private static Logger logger = null;
+	private static Logger logger = null; 
 	
 	public static Connection initBD( String nombreBD ) {
 		try {
