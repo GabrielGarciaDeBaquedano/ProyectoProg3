@@ -200,10 +200,10 @@ public class FlappyCar implements Runnable {
 						if (po.estoyMuerto()==true){ 
 							Partida partida = new Partida(1 , MenuLogin.getNick(), "FlappyCar", columnasPasadas, System.currentTimeMillis() - comienzo, System.currentTimeMillis());
 							BD.insertarPartida(partida);
-							String nombreUsuario = JOptionPane.showInputDialog("Introduce tu nombre: ");
-							Record nuevo = new Record(nombreUsuario, columnasPasadas);
+							//String nombreUsuario = JOptionPane.showInputDialog("Introduce tu nombre: ");
+							//Record nuevo = new Record(nombreUsuario, columnasPasadas);
 							ArrayList<Record> aRecords = FlappyRecords.volcarFicheroAArrayList(Constantes.NF_RECORDS);
-							aRecords.add(nuevo);
+							//aRecords.add(nuevo);
 							FlappyRecords.volcarArrayListAFichero(Constantes.NF_RECORDS, aRecords);
 							resetNivel();
 							nivel=1;
