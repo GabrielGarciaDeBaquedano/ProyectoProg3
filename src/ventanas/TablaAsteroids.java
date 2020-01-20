@@ -93,8 +93,8 @@ public class TablaAsteroids extends JFrame{
 		String SQL = ""; 
 		try {
 			Statement stat = conn.createStatement();
-			SQL = "select codPartida,nombreJugador,nombreJuego,puntuacion,tiempoPartida,fechaPartida from partida"
-					+ "where nombreJuego='Asteroids' "; 
+			SQL = "select codPartida,nombreJugador,nombreJuego,puntuacion,tiempoPartida,fechaPartida from partida "
+					+ "where nombreJuego ='Asteroids' "; 
 
 
 
