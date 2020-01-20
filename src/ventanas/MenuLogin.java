@@ -46,8 +46,6 @@ public class MenuLogin extends JFrame {
 		}
 		
 		private static JTextField nombreUsuario;
-		
-		private static JTextField nick;
 
 		private static JTextField contrasenya;
 		
@@ -100,8 +98,6 @@ public class MenuLogin extends JFrame {
 			lGif = new JLabel( new ImageIcon( "src/img/giphy.gif" ) );
 			
 			nombreUsuario = new JTextField(19);
-			
-			nick = new JTextField(20);
 
 			contrasenya = new JPasswordField(17);
 
@@ -126,8 +122,6 @@ public class MenuLogin extends JFrame {
 			getContentPane().add( lGif, BorderLayout.CENTER );
 			
 			pIzq.add(nombreUsuario);
-			
-			pIzq.add(nick);
 
 			pIzq.add(contrasenya);
 
@@ -141,7 +135,6 @@ public class MenuLogin extends JFrame {
 			pIzq.add(panelContenidos);
 			posicionaLinea( panelContenidos, null, titulo );
 			posicionaLinea( panelContenidos, "Correo:", nombreUsuario );
-			posicionaLinea( panelContenidos, "Nick:", nick);
 			posicionaLinea( panelContenidos, "Password:", contrasenya );
 			
 			bRegistro.addActionListener( 

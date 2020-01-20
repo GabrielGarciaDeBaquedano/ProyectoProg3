@@ -89,12 +89,12 @@ public class TablaAsteroids extends JFrame{
 
 		modelo.setColumnIdentifiers(new Object[] {"codPartida", "Nombre", "Juego","Puntuacion","TiempoJuego", "Fecha"});
 
-		Connection conn = BD.initBD("Arcade.db");
+		Connection conn = BD.initBD("ArcadeMachine");
 		String SQL = ""; 
 		try {
 			Statement stat = conn.createStatement();
-			SQL = "select codPartida,nombreJugador,nombreJuego,puntuacion,tiempoPartida,fechaPartida from partida "
-					+ "where nombreJuego ='Asteroids' "; 
+			SQL = "select codPartida, idusuario,nombreJuego,puntuacion,tiempoPartida,fechaPartida from partida "
+					+ "where idjuego ='1' "; 
 
 
 
