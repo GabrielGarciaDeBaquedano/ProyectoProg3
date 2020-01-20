@@ -83,7 +83,7 @@ public class MenuLogin extends JFrame {
 		public static boolean comprobarContrasenya(String Contrasenya) {
 			Pattern patContrasenya = Pattern.compile(ContrasenyaValida);
 			if(patContrasenya.matcher(contrasenya.getText()).matches()) {
-				System.out.println(Contrasenya + " cumple el patr�n");
+				System.out.println(Contrasenya + " cumple el patron");
 				return patContrasenya.matcher(Contrasenya).matches();
 			} else {
 				System.out.println(Contrasenya + " no cumple el patron");

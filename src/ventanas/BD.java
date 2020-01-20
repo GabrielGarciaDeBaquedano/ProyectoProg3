@@ -28,16 +28,16 @@ public class BD {
 			Statement st = con.createStatement();
 			st.executeUpdate("CREATE TABLE IF NOT EXISTS Jugador(idusuario int(10) PRIMARY KEY AUTOINCREMENT,"
 					+ " nombreJugador VARCHAR(100),"
-					+ "contrasenya VARCHAR(20))");
+					+ " contrasenya VARCHAR(20))");
 			st.executeUpdate("CREATE TABLE IF NOT EXISTS Juego(idjuego int(10) PRIMARY KEY NOT NULL, "
-					+ "nombreJuego VARCHAR(100));");
+					+ " nombreJuego VARCHAR(100));");
 			st.executeUpdate("CREATE TABLE IF NOT EXISTS Partida"
-					+ "(codPartida int(10) PRIMARY KEY NOT NULL,"
-					+ "idusuario int(10),"
-					+ " nombreJuego VARCHAR(100),  puntuacion VARCHAR(7), tiempoPartida DECIMAL(5, 2), fechaPartida DATE,"
-					+ "idjuego int(10),"
-					+ "FOREIGN KEY(idusuario) references Jugador(idusuario) ON DELETE CASCADE, "
-					+ "FOREIGN KEY(idjuego) references Juego(idjuego) ON DELETE CASCADE);");
+					+ " (codPartida int(10) PRIMARY KEY AUTOINCREMENT,"
+					+ " idusuario int(10),"
+					+ " puntuacion VARCHAR(7), tiempoPartida DECIMAL(5, 2), fechaPartida DATE,"
+					+ " idjuego int(10),"
+					+ " FOREIGN KEY(idusuario) references Jugador(idusuario) ON DELETE CASCADE, "
+					+ " FOREIGN KEY(idjuego) references Juego(idjuego) ON DELETE CASCADE);");
 			
 			try {
 				st.executeUpdate( "insert into Juego (id, nombreJuego) values (1,'Asteroids');" );
@@ -104,8 +104,8 @@ public class BD {
 			Statement stmt = con.createStatement();
 			String sentSQL = "insert into Partida(codigo, nombreJugador, nombreJuego, puntuacion, tiempoJuego, fecha) values(,"
 			+ partida.getCodPartida()
-			+ partida.getNombreJugador()
-			+ partida.getNombreJuego()
+			+ partida.getIdJugador()
+			+ partida.getIdJuego()
 			+ partida.getPuntuacion()
 			+ partida.getTiempoPartida() 
 			+ partida.getFechaPartida() + " );";

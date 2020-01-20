@@ -3,36 +3,36 @@ package ventanas;
 public class Partida {
 	
 	public int codPartida;
-	protected String nombreJugador;
-	protected String nombreJuego;
+	protected int idJugador;
+	protected int idJuego;
 	protected int puntuacion;
 	protected long tiempoPartida;
 	protected long fechaPartida;
 	
-	public Partida(int codPartida, String nombreJugador, String nombreJuego, int puntuacion, long tiempoPartida, long fechaPartida) {
+	public Partida(int codPartida, int idJugador, int idJuego, int puntuacion, long tiempoPartida, long fechaPartida) {
 		super();
 		this.codPartida = codPartida;
-		this.nombreJugador = nombreJugador;
-		this.nombreJuego = nombreJuego;
+		this.idJugador = idJugador;
+		this.idJuego = idJuego;
 		this.puntuacion = puntuacion;
 		this.tiempoPartida = tiempoPartida;
 		this.fechaPartida = fechaPartida;
 	}
 
-	public String getNombreJugador() {
-		return nombreJugador;
+	public int getIdJugador() {
+		return idJugador;
 	}
 
-	public void setNombreJugador(String nombreJugador) {
-		this.nombreJugador = nombreJugador;
+	public void setIdJugador(int idJugador) {
+		this.idJugador = idJugador;
 	}
 
-	public String getNombreJuego() {
-		return nombreJuego;
+	public int getIdJuego() {
+		return idJuego;
 	}
 
-	public void setNombreJuego(String nombreJuego) {
-		this.nombreJuego = nombreJuego;
+	public void setIdJuego(int idJuego) {
+		this.idJuego = idJuego;
 	}
 
 	public int getCodPartida() {
