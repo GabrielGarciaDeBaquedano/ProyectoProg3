@@ -26,13 +26,13 @@ public class BD {
 		    con = DriverManager.getConnection("jdbc:sqlite:" + nombreBD );
 			log( Level.INFO, "Conectada base de datos " + nombreBD, null );
 			Statement st = con.createStatement();
-			st.executeUpdate("CREATE TABLE IF NOT EXISTS Jugador(idusuario int(10) PRIMARY KEY AUTOINCREMENT,"
+			st.executeUpdate("CREATE TABLE IF NOT EXISTS Jugador(idusuario INTEGER PRIMARY KEY AUTOINCREMENT,"
 					+ " nombreJugador VARCHAR(100),"
 					+ " contrasenya VARCHAR(20))");
 			st.executeUpdate("CREATE TABLE IF NOT EXISTS Juego(idjuego int(10) PRIMARY KEY NOT NULL, "
 					+ " nombreJuego VARCHAR(100));");
 			st.executeUpdate("CREATE TABLE IF NOT EXISTS Partida"
-					+ " (codPartida int(10) PRIMARY KEY AUTOINCREMENT,"
+					+ " (codPartida INTEGER PRIMARY KEY AUTOINCREMENT,"
 					+ " idusuario int(10),"
 					+ " puntuacion VARCHAR(7), tiempoPartida DECIMAL(5, 2), fechaPartida DATE,"
 					+ " idjuego int(10),"
@@ -40,12 +40,12 @@ public class BD {
 					+ " FOREIGN KEY(idjuego) references Juego(idjuego) ON DELETE CASCADE);");
 			
 			try {
-				st.executeUpdate( "insert into Juego (id, nombreJuego) values (1,'Asteroids');" );
-				st.executeUpdate( "insert into Juego (id, nombreJuego) values (2,'Pong');" );
-				st.executeUpdate( "insert into Juego (id, nombreJuego) values (3,'Flappy Car');" );
-				st.executeUpdate( "insert into Juego (id, nombreJuego) values (4,'Busca Minas');" );
+				st.executeUpdate( "insert into Juego (idjuego, nombreJuego) values (1,'Asteroids');" );
+				st.executeUpdate( "insert into Juego (idjuego, nombreJuego) values (2,'Pong');" );
+				st.executeUpdate( "insert into Juego (idjuego, nombreJuego) values (3,'Flappy Car');" );
+				st.executeUpdate( "insert into Juego (idjuego, nombreJuego) values (4,'Busca Minas');" );
 				
-			} catch(Exception e) {}
+			} catch(Exception e) {e.printStackTrace();}
 			
 		    return con;
 		} catch (ClassNotFoundException | SQLException e) {
@@ -57,13 +57,14 @@ public class BD {
 
 	public static boolean insertarJugador(Jugador jugador) {
 		//con = initBD("Arcade.db");
-		String sql = "INSERT INTO jugador(idusuario, nombreJugador, contrasenya) VALUES(0,'"+jugador.getNombreJugador()+"','"+jugador.getContrasenya()+"')";
-			try {
+		String sql = "INSERT INTO jugador(nombreJugador, contrasenya) VALUES(?,?)";
+			System.out.println(sql);
+		try {
 				
 				PreparedStatement pst = con.prepareStatement(sql);
-//				pst.setInt(1, jugador.getIdusuario());
-//				pst.setString(2, jugador.getNombreJugador());
-//				pst.setString(3, jugador.getContrasenya());
+				pst.setString(1, jugador.getNombreJugador());
+				pst.setString(2, jugador.getContrasenya());
+				pst.executeUpdate();
 				return true;
 			}catch( SQLException e ) {
 				e.printStackTrace();
@@ -74,13 +75,15 @@ public class BD {
 	
 	public static boolean obtenerJugador(Jugador jugador) {
 		//con = initBD("Arcade.db");
-		String sql = "SELECT idusuario, nombreJugador, contrasenya FROM Jugador WHERE nombreJugador = '"+jugador.getNombreJugador()+"';";
+		String sql = "SELECT idusuario, nombreJugador, contrasenya FROM Jugador WHERE nombreJugador = ?";
 		try {
 			PreparedStatement pst = con.prepareStatement(sql);
-//			pst.setString(1, jugador.getNombreJugador());
+			pst.setString(1, jugador.getNombreJugador());
 			
 			ResultSet rs = pst.executeQuery();
 			if(rs.next()) {
+				System.out.println(sql);
+				System.out.println(rs.getString(3));
 				if(jugador.getContrasenya().equals(rs.getString(3))) {
 					jugador.setIdusuario(rs.getInt(1));
 					jugador.setNombreJugador(rs.getString(2));
