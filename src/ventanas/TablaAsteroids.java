@@ -1,21 +1,24 @@
 package ventanas;
 
 
+
 import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.logging.Level;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
 
-public class TablaAsteroids extends JFrame{
 
-	/**
-	 * 
-	 */
+public class TablaAsteroids extends JFrame{
+	
 	private static final long serialVersionUID = 1L;
 
 
@@ -23,16 +26,17 @@ public class TablaAsteroids extends JFrame{
 
 
 	public static void main(String[] args) {
-		TablaAsteroids ver = new TablaAsteroids(); 
-		ver.mostrar();
-		ver.setVisible(true);
+		TablaAsteroids vLA = new TablaAsteroids(); 
+		vLA.mostrar();
+		vLA.setVisible(true);
 	}
 
-	JButton bVolver, bBorrar; 
-	JTable tablaEstats; 
+	JButton bVolver; 
+	JTable tablaAsteroids; 
 	JPanel pBotonera, pPrincipal; 
 	JTableHeader header; 
-	
+	DefaultTableModel modelo;
+	Object valor; 
 
 
 
@@ -43,26 +47,23 @@ public class TablaAsteroids extends JFrame{
 		setSize(600,400);
 		setLocation(300, 200);
 
-		setTitle("Tabla Estadisticas");
+		setTitle("Tabla Asteroids");
 		setDefaultCloseOperation( JFrame.DISPOSE_ON_CLOSE );
 
 		pBotonera = new JPanel(); 
 
 		bVolver = new JButton("volver"); 
-		bBorrar = new JButton("Borrar fila"); 
 
-		pBotonera.add(bVolver); 
-		pBotonera.add(bBorrar); 
+		pBotonera.add(bVolver);  
 
 		pPrincipal = new JPanel(); 
-		tablaEstats = new JTable();
-		header = new JTableHeader(); 
-	
 
-		pPrincipal.add(tablaEstats);
-		
 
-		
+		tablaAsteroids = new JTable(modelo);
+
+		pPrincipal.add(new JScrollPane(tablaAsteroids));
+
+
 
 
 
@@ -71,44 +72,44 @@ public class TablaAsteroids extends JFrame{
 		getContentPane().add(pBotonera, BorderLayout.SOUTH); 
 
 
-
-
+		bVolver.addActionListener((ActionEvent e ) -> {volver(); });
 
 
 	}
 
 
+	public void volver() {
 
+		setVisible(false);
+		VentanaEstadisticas.main(null); 
+		dispose();
+	}				
+	
 	private void mostrar() {
 
-		DefaultTableModel modelo = new DefaultTableModel();
-		
 
-	
+		String column_names[]= {"Nombre", "Puntuacion", "Tiempo"};
 
+		modelo = new DefaultTableModel(column_names,0);
 
-		modelo.setColumnIdentifiers(new Object[] {"codPartida", "Nombre", "Juego","Puntuacion","TiempoJuego", "Fecha"});
 
 		Connection conn = BD.initBD("ArcadeMachine");
 		String SQL = ""; 
 		try {
 			Statement stat = conn.createStatement();
-			SQL = "select codPartida, idusuario,nombreJuego,puntuacion,tiempoPartida,fechaPartida from partida "
-					+ "where idjuego ='1' "; 
+			SQL = "select nombreJugador, puntuacion, tiempoPartida from Jugador J, Partida P where J.idusuario = P.idusuario and"
+					+ " idjuego = 1 ";  
 
 
 
 			ResultSet rs = stat.executeQuery( SQL );
 			while(rs.next()) {
-				
 
-				modelo.addRow(new Object[] {rs.getString("codPartida"), rs.getString("nombreJugador"), rs.getString("nombreJuego"), rs.getString("puntuacion"), rs.getString("tiempoPartida"), rs.getString("fechaPartida")});
+				modelo.addRow(new Object[] {rs.getString("nombreJugador"), rs.getString("puntuacion"), rs.getString("tiempoPartida")});
 
 			}
-			
 
-			tablaEstats.setModel(modelo);
-			
+			tablaAsteroids.setModel(modelo);
 
 		}catch(Exception e){
 			System.out.println(e);
