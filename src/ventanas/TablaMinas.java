@@ -9,6 +9,7 @@ import java.awt.event.MouseEvent;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.TreeSet;
 import java.util.logging.Level;
 
 import javax.swing.*;
@@ -87,7 +88,8 @@ public class TablaMinas extends JFrame{
 	
 	private void mostrar() {
 
-
+		TreeSet<Puntuacion> puntuaciones = new TreeSet<Puntuacion>();
+		
 		String column_names[]= {"Nombre", "Puntuacion", "Tiempo"};
 
 		modelo = new DefaultTableModel(column_names,0);
@@ -105,10 +107,13 @@ public class TablaMinas extends JFrame{
 			ResultSet rs = stat.executeQuery( SQL );
 			while(rs.next()) {
 
-				modelo.addRow(new Object[] {rs.getString("nombreJugador"), rs.getString("puntuacion"), rs.getString("tiempoPartida")});
+				puntuaciones.add(new Puntuacion(rs.getString("nombreJugador"), rs.getInt("puntuacion"), rs.getLong("tiempoPartida")));
 
 			}
-
+			
+			for (Puntuacion puntuacion : puntuaciones) {
+				modelo.addRow(new Object[] {puntuacion.getNombreUsuario(), puntuacion.getPuntos(), puntuacion.getTiempo()});
+			}
 			tablaMinas.setModel(modelo);
 
 		}catch(Exception e){

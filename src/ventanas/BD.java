@@ -152,3 +152,5 @@ public class BD {
 				logger.log( level, msg, excepcion );
 		}
 }
+
+

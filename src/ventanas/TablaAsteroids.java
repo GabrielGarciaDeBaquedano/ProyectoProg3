@@ -6,14 +6,18 @@ import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.HashMap;
+import java.util.TreeSet;
 import java.util.logging.Level;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
+
 
 
 
@@ -87,7 +91,8 @@ public class TablaAsteroids extends JFrame{
 	
 	private void mostrar() {
 
-
+		TreeSet<Puntuacion> puntuaciones = new TreeSet<Puntuacion>();
+		
 		String column_names[]= {"Nombre", "Puntuacion", "Tiempo"};
 
 		modelo = new DefaultTableModel(column_names,0);
@@ -105,10 +110,13 @@ public class TablaAsteroids extends JFrame{
 			ResultSet rs = stat.executeQuery( SQL );
 			while(rs.next()) {
 
-				modelo.addRow(new Object[] {rs.getString("nombreJugador"), rs.getString("puntuacion"), rs.getString("tiempoPartida")});
+				puntuaciones.add(new Puntuacion(rs.getString("nombreJugador"), rs.getInt("puntuacion"), rs.getLong("tiempoPartida")));
 
 			}
-
+			
+			for (Puntuacion puntuacion : puntuaciones) {
+				modelo.addRow(new Object[] {puntuacion.getNombreUsuario(), puntuacion.getPuntos(), puntuacion.getTiempo()});
+			}
 			tablaAsteroids.setModel(modelo);
 
 		}catch(Exception e){
