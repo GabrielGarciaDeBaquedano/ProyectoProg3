@@ -48,7 +48,7 @@ public class TablaFlappy extends JFrame{
 		setSize(600,400);
 		setLocation(300, 200);
 
-		setTitle("Tabla Asteroids");
+		setTitle("Tabla Flappy");
 		setDefaultCloseOperation( JFrame.DISPOSE_ON_CLOSE );
 
 		pBotonera = new JPanel(); 

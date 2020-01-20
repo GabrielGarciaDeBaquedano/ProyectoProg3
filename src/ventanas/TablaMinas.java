@@ -48,7 +48,7 @@ public class TablaMinas extends JFrame{
 		setSize(600,400);
 		setLocation(300, 200);
 
-		setTitle("Tabla Asteroids");
+		setTitle("Tabla Minas");
 		setDefaultCloseOperation( JFrame.DISPOSE_ON_CLOSE );
 
 		pBotonera = new JPanel(); 
