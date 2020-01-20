@@ -17,6 +17,8 @@ public class Minesweeper extends JFrame
 	private Tablero tablero;
 	private JButton reset;
 	private boolean acabado;
+	protected static long tiempoFin;
+	protected static long tiempoInicio;
  
 	public Minesweeper(int x, int y, int d)
 	{
@@ -61,7 +63,7 @@ public class Minesweeper extends JFrame
 	{
 		Random random = new Random();
 		acabado = false;
- 
+		tiempoInicio = System.currentTimeMillis();
 		for (int i = 0; i < anchura; i++)
 		{
 			for (int j = 0; j < altura; j++)
@@ -174,6 +176,16 @@ public class Minesweeper extends JFrame
 		}
 		refresh();
 		JOptionPane.showMessageDialog(null, "BOOOOM!");
+		tiempoFin = System.currentTimeMillis();
+		long tiempoJuego =  tiempoFin-tiempoInicio;
+		Partida partida = new Partida();
+		partida.setPuntuacion(0);
+		partida.setTiempoPartida(tiempoJuego);
+		partida.setFechaPartida(System.currentTimeMillis());
+		partida.setIdJuego(4);
+		partida.setIdJugador(MenuLogin.getIdUsuarioEnUso());
+		BD.insertarPartida(partida);
+		System.out.println("Partida insertada");
 		reset();
 	}
  
@@ -191,6 +203,16 @@ public class Minesweeper extends JFrame
  
 		refresh();
 		JOptionPane.showMessageDialog(null, "Felicidades! Has ganado!");
+		tiempoFin = System.currentTimeMillis();
+		long tiempoJuego =  tiempoFin-tiempoInicio;
+		Partida partida = new Partida();
+		partida.setPuntuacion(1);
+		partida.setTiempoPartida(tiempoJuego);
+		partida.setFechaPartida(System.currentTimeMillis());
+		partida.setIdJuego(4);
+		partida.setIdJugador(MenuLogin.getIdUsuarioEnUso());
+		BD.insertarPartida(partida);
+		System.out.println("Partida insertada");
 		reset();
 	}
  

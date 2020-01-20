@@ -33,6 +33,8 @@ public class JuegoPong {
 	private static final double VEL_RANGO = 200;   
 	private static final double VEL_PALA = 500;    
 	private static boolean ESTADO_JUEGO = true;
+	protected static long tiempoFin;
+	protected static long tiempoInicio;
 	
 	
 	private static final boolean DEBUG_CHOQUES = false;  
@@ -74,6 +76,7 @@ public class JuegoPong {
 	 */
 	public void crearJuego() {
 		
+		tiempoInicio = System.currentTimeMillis();
 		vent = new VentanaPong( 600, 450, "Juego de pong" );
 		bolas = new ArrayList<Circulo>();
 		elementos = new ArrayList<Figura>();
@@ -245,6 +248,16 @@ public class JuegoPong {
 			// Dibujado de Game Over cuando se acaba el juego
 			if (vent.isTeclaPulsada(KeyEvent.VK_ESCAPE)) {
 				
+				tiempoFin = System.currentTimeMillis();
+				long tiempoJuego =  tiempoFin-tiempoInicio;
+				Partida partida = new Partida();
+				partida.setPuntuacion(pala1.getMarcador()-pala2.getMarcador());
+				partida.setTiempoPartida(tiempoJuego);
+				partida.setFechaPartida(System.currentTimeMillis());
+				partida.setIdJuego(2);
+				partida.setIdJugador(MenuLogin.getIdUsuarioEnUso());
+				BD.insertarPartida(partida);
+				System.out.println("Partida insertada");
 				vent.borra();
 				vent.dibujaRect(0, 0, vent.getAnchura(), vent.getAltura(), 40, Color.BLACK, Color.WHITE);
 				vent.dibujaImagen("src/img/gameover.png", vent.getAnchura() / 2, vent.getAltura() / 2, 1, 0, 1);

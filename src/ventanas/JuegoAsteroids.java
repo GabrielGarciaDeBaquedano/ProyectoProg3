@@ -174,7 +174,7 @@ public class JuegoAsteroids {
 							System.out.println("choque de nave y ast " + nave +" "+ ast);
 							//System.out.println("Estadisticas:\n"+"Disparos realizados: "+numDisp+"\n"+"Disparos impactados: "+numImp+"\n"+"Porcentaje disparos impactados: "+(numImp/numDisp)*100+"% \n"+"Tiempo de juego: "+tiempoJuego+"s");
 							tiempoFin = System.currentTimeMillis();
-							long tiempoJuego = (long) ((tiempoFin-tiempoInicio)/1000.00);
+							long tiempoJuego =  tiempoFin-tiempoInicio;
 							Partida partida = new Partida();
 							partida.setPuntuacion(getPuntuacion());
 							partida.setTiempoPartida(tiempoJuego);
